@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="documentTitle">검색페이지</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
+    <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
+    <style>
+        /* root css */
+        :root{
+            --color-white : #efefef; 
+            --color-gray : ##98a4b7; 
+            --color-darkgray : #586a85; 
+            --color-darkblue : #101322;
+        }
+
+        /* icon css*/
+        .icon{display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100% 100%; object-fit: contain;}
+        .icon_search{width: 40px; height: 40px; background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNC41NDg2IDYuMDAwMTJDOS44MjczNSA2LjAwMDEyIDYgOS44Mjc0NyA2IDE0LjU0ODdDNiAxOS4yNyA5LjgyNzM1IDIzLjA5NzQgMTQuNTQ4NiAyMy4wOTc0QzE2LjQ0MjggMjMuMDk3NCAxOC4xOTM5IDIyLjQ4MDkgMTkuNjExIDIxLjQzNzlMMjMuNzk0OSAyNS42MjE4QzI0LjI5OTMgMjYuMTI2MiAyNS4xMTcyIDI2LjEyNjIgMjUuNjIxNyAyNS42MjE4QzI2LjEyNjEgMjUuMTE3MyAyNi4xMjYxIDI0LjI5OTUgMjUuNjIxNyAyMy43OTVMMjEuNDM3OCAxOS42MTExQzIyLjQ4MDggMTguMTk0IDIzLjA5NzIgMTYuNDQyOSAyMy4wOTcyIDE0LjU0ODdDMjMuMDk3MiA5LjgyNzQ3IDE5LjI2OTkgNi4wMDAxMiAxNC41NDg2IDYuMDAwMTJaTTguNTgzNDYgMTQuNTQ4N0M4LjU4MzQ2IDExLjI1NDMgMTEuMjU0MiA4LjU4MzU4IDE0LjU0ODYgOC41ODM1OEMxNy44NDMxIDguNTgzNTggMjAuNTEzOCAxMS4yNTQzIDIwLjUxMzggMTQuNTQ4N0MyMC41MTM4IDE2LjE2MDcgMTkuODc0OSAxNy42MjI2IDE4LjgzNTggMTguNjk2NUMxOC44MTEgMTguNzE3OCAxOC43ODY4IDE4Ljc0MDEgMTguNzYzNCAxOC43NjM2QzE4Ljc0IDE4Ljc4NyAxOC43MTc3IDE4LjgxMTEgMTguNjk2NCAxOC44MzU5QzE3LjYyMjUgMTkuODc1MSAxNi4xNjA2IDIwLjUxMzkgMTQuNTQ4NiAyMC41MTM5QzExLjI1NDIgMjAuNTEzOSA4LjU4MzQ2IDE3Ljg0MzIgOC41ODM0NiAxNC41NDg3WiIgZmlsbD0iI2VmZWZlZiIvPgo8L3N2Zz4K);}
+
+        /* common css*/
+        *{box-sizing: border-box; text-decoration: none;}
+        body{background-color: var(--color-darkblue); color: var(--color-white);}
+        main{padding: 56px 0;}
+        img{display: block; width: 100%;}
+        .inner{width: 94%;; max-width: 700px; margin: 0 auto;}
+
+        /* sec_info */
+        .sec_info .inner{position: relative;}
+        .sec_info .nav{position: absolute; right: 10px; top: 10px; z-index: 3;}
+        .sec_info .bg_box .bg{width: 100%; height: 310px; }
+        .sec_info .bg_box .gradient{ position: absolute; inset: 0; background: linear-gradient(180deg,rgba(16,19,34,0),rgba(16,19,34,.76) 77.19%,var(--color-darkblue) 93.19%),linear-gradient(90deg,rgba(16,19,34,0) 72.46%,rgba(16,19,34,.76) 90.53%,var(--color-darkblue) 98.12%),linear-gradient(270deg,rgba(16,19,34,0) 72.46%,rgba(16,19,34,.76) 90.53%,var(--color-darkblue) 98.12%)}
+        
+        .sec_info .info_box{position: absolute; inset: auto 0 0 0; display: flex; justify-content: space-between; align-items: flex-end;}
+        .sec_info .text_box .type{display: inline-flex; justify-content: center; align-items: center; height: 23px; padding: 0 12px; margin-bottom: 6px; font-size: 13px; font-weight: 600; text-transform: uppercase; border: 1px solid var(--color-white); color: var(--color-white);}
+        .sec_info .text_box .title{margin-bottom: 3px; font-size: 20px; font-weight: 700; line-height: 28px; color: var(--color-white);}
+        .sec_info .text_box .date{margin-bottom: 15px; font-size: 14px; color: var(--color-gray); line-height: 20px; font-weight: 400; letter-spacing: -0.05em;}
+        .sec_info .text_box .tag_list{display: flex; gap: 8px; flex-wrap: wrap;}
+        .sec_info .text_box .tag{display: inline-flex; justify-content: center; align-items: center; height: 24px; padding: 0 10px; border-radius: 50px; font-size: 12px; color: #fff; background-color: #25304a; text-transform: uppercase;}
+        .sec_info .poster_box{flex-shrink: 0; width: 100px; border-radius: 8px; overflow: hidden;}
+
+        /* sec_contents */
+        .sec_contents .inner{padding: 60px 0 100px;}
+        .sec_contents .tab_btn_wrap{display: flex; border-bottom: 1px solid var(--color-darkgray);}
+        .sec_contents .tab_btn_wrap .btn_tab{display: inline-flex; justify-content: center; align-items: center; height: 37px; width: 120px;color: var(--color-darkgray); cursor: pointer; font-weight: 700;}
+        .sec_contents .tab_btn_wrap .btn_tab.active{position: relative; color: var(--color-white);}
+        .sec_contents .tab_btn_wrap .btn_tab.active::after{content: ''; position: absolute; bottom: -1px; width: 100%; height: 2px; background-color: var(--color-white);}
+        
+        .sec_contents .contents{display: none;}
+        .sec_contents .contents.active{display: block;}
+
+        #summary .sec{padding:40px 0 30px; border-bottom: 1px solid var(--color-darkgray);}
+        #summary .sec .title{ margin-bottom: 6px; font-size: 17px; font-weight: 700; line-height: 28px; color: var(--color-white);}
+        #summary .summary_box .summary{font-size: 13px; font-weight: 500; line-height: 1.5em; color: var(--color-white); letter-spacing: -0.05em;}
+
+        #summary .video_wrap{position: relative; padding-bottom: 56.25%;}
+        #summary .video_box iframe{position: absolute; width: 100%; height: 100%;}
+
+        #summary .swiper-container .item{width: 140px; margin-right: 20px;}
+        #summary .swiper-container .item:last-child{margin-right: 0;}
+        #summary .swiper-container .item .img_box{margin-bottom: 10px; border-radius: 8px; overflow: hidden;}
+        #summary .swiper-container .item .text_box{padding-bottom: 4px;}
+        #summary .swiper-container .item .name{margin-bottom: 3px; font-size: 16px; font-weight: 700;}
+        #summary .swiper-container .item .character{font-size: 14px; font-weight: 700; color: var(--color-darkgray);}
+
+        #summary .swiper-container .item .title{display: -webkit-box; display: -ms-flexbox; margin-bottom: 5px; min-height:38px; overflow:hidden; vertical-align:top; text-overflow: ellipsis; word-break:break-all; -webkit-box-orient:vertical; -webkit-line-clamp:2; font-size: 14px; line-height: 1.3em; color: #fff; font-weight: 700; }
+        #summary .swiper-container .item .date{ font-size:12px; font-weight: 500; color: #fff;}
+
+    </style>
+</head>
+<body>
+    <header class="header-wrap">
+        <a href="/index.html"><img src="/images/logo.svg"></a>
+    </header>
+    <main id="wrap">
+        <section class="sec_info">
+            <div class="inner">
+                <div class="nav">
+                    <a href="/search.html" title="검색페이지로 이동" tabindex="0">
+                        <i class="icon icon_search"></i>
+                    </a>
+                </div>
+                <div class="bg_box">
+                    <div class="bg"></div>
+                    <div class="gradient"></div>
+                </div>
+                <div class="info_box">
+                    <div class="text_box">
+                        <h2 class="title"></h2>
+                        <p class="date"></p>
+                        <ul class="tag_list"></ul>
+                    </div>
+                    <div class="poster_box">
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="sec_contents">
+            <div class="inner">
+                <ul class="tab_btn_wrap">
+                    <li><button type="button" class="btn_tab active" data-tab-id="summary" title="작품정보 보기">작품정보</button></li>
+                    <li><button type="button" class="btn_tab" data-tab-id="review" title="리뷰 보기">리뷰</button></li>
+                    <!-- <li><button type="button" class="btn_tab" data-tab-id="community" title="커뮤니티 보기">커뮤니티</button></li> -->
+                </ul>
+                <div class="contents_wrap">
+                    <div id="summary" class="active contents">
+                        <div class="summary_box sec">
+                            <h3 class="title">줄거리</h3>
+                            <p class="summary"></p>
+                        </div>
+                        <div class="video_box sec">
+                            <h3 class="title">예고편</h3>
+                            <div class="video_wrap">
+                                <iframe src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="actor_box sec">
+                            <h3 class="title">출연진</h3>
+                            <div class="swiper-container actor_swiper">
+                                <ul class="swiper-wrapper"></ul>
+                            </div>
+                        </div>
+                        <div class="similar_box sec">
+                            <h3 class="title">오늘 뭐보지?</h3>
+                            <div class="swiper-container similar_swiper">
+                                <ul class="swiper-wrapper"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="review" class="contents">리뷰 영역</div>
+                    <!-- <div id="community" class="contents">커뮤니티</div> -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer-wrap">
+        <div class="navigator">
+            <a href="/index.html" class="nav-item home"><span class="nav-txt">홈</span></a>
+            <a href="/search.html" class="nav-item search"><span class="nav-txt">검색</span></a>
+            <a href="/list.html" class="nav-item community"><span class="nav-txt">커뮤니티</span></a>
+            <a href="/mypage.html" class="nav-item my-page"><span class="nav-txt">MY</span></a>
+    </div>
+    </footer>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script>
+
+        /*   env   */ 
+        const user = {
+            APIKEY : "api_key=4440ab34848ee6aa6bd8890d39ed2b25",
+            LANGUAGE : "language=ko",
+            BASEURL : "https://api.themoviedb.org/3",
+            Authorization : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDQwYWIzNDg0OGVlNmFhNmJkODg5MGQzOWVkMmIyNSIsInN1YiI6IjY1NTk3OTUzYjU0MDAyMTRkODJkNTBhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ux96P5Zr2-PMRUrvFbvlmceFWnZnAXQZs2ceylVCNDs`
+        }
+
+        /*   class Tmdb   */ 
+        class Tmdb{
+            constructor(data, category){
+                this.videoList = data;
+            }
+            // 영화정보 랜더링
+            infoRender(data, type){
+                console.log(data, '영화정보')
+                const documentTitle = document.querySelector('#documentTitle');
+                const textBox = document.querySelector(".sec_info .text_box");
+                const title = document.querySelector(".sec_info .title");
+                const date = document.querySelector(".sec_info .date");
+                const tagList = document.querySelector(".sec_info .tag_list");
+                const bg = document.querySelector(".bg_box .bg");
+                const poster = document.querySelector(".poster_box img");
+                const summary = document.querySelector(".summary_box .summary");
+                
+                // 정보 setting
+                documentTitle.innerHTML = `${type == "movie" ? data.title : data.name} 상세페이지`;
+                textBox.insertAdjacentHTML("afterbegin", `<span class="type">${type}</span>`);
+                title.innerHTML = type == "movie" ? data.title : data.name;
+                date.innerHTML = type == "movie" ? `개봉일 : ${data.release_date}` : `방영일 : ${data.first_air_date} ~ ${data.last_air_date}`;
+                bg.style.background = `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.backdrop_path}) no-repeat center / cover`;
+                bg.setAttribute("src", `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.backdrop_path}`);
+                poster.setAttribute("src", `https://image.tmdb.org/t/p/w220_and_h330_face/${data.poster_path}`);
+                poster.setAttribute("alt", `${data.name}`);
+
+                summary.innerHTML = data.overview;
+
+                data.genres.forEach(el => {
+                    let tag = `<li class="tag">#${el.name}</li>`
+                    tagList.insertAdjacentHTML("beforeend", tag);
+                });
+            }
+            // 예고편 랜더링
+            videoRender(data){
+                const videoBox = document.querySelector(".video_box")
+                const iframe = document.querySelector(".video_box iframe")
+
+                console.log(data, '예고편');
+                //예고편 없으면 삭제 
+                if(data.results.length == 0) videoBox.style.display = "none";
+
+                // 예고편이 메인예고편이 없을때 예외처리
+                if(data.results.length >= 1) iframe.setAttribute("src", `https://www.youtube.com/embed/${data.results[0].key}`);
+ 
+                // 메인예고편
+                let mainVideo = data.results.forEach((el) => {
+                    if(el.name.indexOf("메인") != -1){
+                        iframe.setAttribute("src", `https://www.youtube.com/embed/${el.key}`);
+                    }
+                })
+            }
+            // 배우 랜더링
+            actorRender(data){
+                let actor = data.cast;
+                const actorSwiper = document.querySelector(".actor_swiper .swiper-wrapper")
+
+                // 프로필사진 없으면 삭제
+                actor = actor.filter((item) => item.profile_path != null)
+                actor.forEach((el) => {
+                    let html = `
+                            <li class="swiper-slide item">
+                                <div class="img_box">
+                                    <img src="https://www.themoviedb.org/t/p/w138_and_h175_face${el.profile_path}" alt="${el.name}">
+                                </div>
+                                <div class="text_box">
+                                    <p class="name">${el.name}</p>
+                                    <p class="character">${el.character}</p>
+                                </div>
+                            </li>
+                    `;
+
+                    actorSwiper.insertAdjacentHTML("beforeend", html);
+                })
+                detailJS.actorSwiper.update();
+            }
+            // 추천작 랜더링
+            similarRender(data){
+                console.log(data, "추천영화")
+                let similar = data.results;
+                const similarSwiper = document.querySelector(".similar_swiper .swiper-wrapper")
+
+                similar = similar.filter((item) => item.poster_path != null)
+
+                // 개봉일 최신순 sort
+                similar = similar.sort(function(a, b){
+                    let dataA = a.popularity;
+                    let dataB = b.popularity;
+
+                    if(dataA > dataB) return -1;
+                    if(dataA === dataB) return 0;
+                    if(dataA < dataB) return 1;
+                })
+                similar.forEach(item => {
+                        let html = `
+                            <li class="swiper-slide item" data-id="${item.id}" data-genre-id=${item.genre_ids} data-type=${item.media_type}>
+                                <a href="/detail.html?id=${item.id}&type=${item.media_type}" name="${item.media_type == "movie" ? item.title : item.name}" class="btn_link" title="${item.media_type == "movie" ? item.title : item.name} 상세 페이지로 이동">
+                                    <div class="img_box">
+                                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${item.poster_path}" alt="${item.media_type == "movie" ? item.title : item.name} 포스터">
+                                    </div>
+                                    <div class="text_box">
+                                        <p class="title">${item.media_type == "movie" ? item.title : item.name} </p>
+                                        <p class="date">${item.media_type == "movie" ? item.release_date : item.first_air_date}</p>
+                                    </div>
+                                <a>
+                            </li>
+                        `;
+                        
+                        similarSwiper.insertAdjacentHTML("beforeend", html);
+                    });
+                detailJS.similarSwiper.update();
+                detailJS.setWordEvt();
+            }
+        }
+
+        /*   API   */ 
+        const TMDB = new Tmdb();
+        const callAPI = {
+            options : {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: user.Authorization
+                }
+            },
+            // 영화정보 조회
+            infoApi : function(id, type){
+                fetch(`${user.BASEURL}/${type}/${id}?${user.LANGUAGE}`, callAPI.options)
+                .then(data => data.json())
+                .then(data => {
+                    TMDB.infoRender(data, type);
+                })
+                .catch(err => console.error(err));
+            },
+            // 예고편 조회
+            videoApi : function(id, type){
+                fetch(`${user.BASEURL}/${type}/${id}/videos?${user.LANGUAGE}`, callAPI.options)
+                .then(data => data.json())
+                .then(data => {
+                    TMDB.videoRender(data, type);
+                })
+                .catch(err => console.error(err));
+            },
+            // 배우 조회
+            actorApi : function(id, type){
+                fetch(`${user.BASEURL}/${type}/${id}/credits?${user.LANGUAGE}`, callAPI.options)
+                .then(data => data.json())
+                .then(data => {
+                    TMDB.actorRender(data, type);
+                })
+                .catch(err => console.error(err));
+            },
+            // 트렌드 조회
+            similarApi : function(id, type){
+                fetch(`${user.BASEURL}/trending/${type}/week?${user.LANGUAGE}`, callAPI.options)
+                .then(data => data.json())
+                .then(data => {
+                    TMDB.similarRender(data, type);
+                })
+                .catch(err => console.error(err));
+            }
+        }
+
+
+        /*   JS   */ 
+        const detailJS = {
+            actorSwiper : undefined,
+            similarSwiper : undefined,
+            // URL 처리
+            getParameter: function() {
+                let idRegexp = /[^0-9]/g;
+                let typeRegexp = /.*.type=/g;
+
+                let id = location.search.replace(idRegexp, "");
+                let type = location.search.replace(typeRegexp, "");
+
+                callAPI.infoApi(id, type);
+                callAPI.videoApi(id, type);
+                callAPI.actorApi(id, type);
+                callAPI.similarApi(id, type);
+            },
+            // 탭 이벤트
+            tabEvt : function(){
+                const btn = document.querySelectorAll(".tab_btn_wrap .btn_tab");
+                const contents = document.querySelectorAll(".contents_wrap .contents");
+
+                btn.forEach((el, idx) => {
+                    btn[idx].addEventListener('click', function(){
+                        let id = this.getAttribute("data-tab-id");
+
+                        btn.forEach(el => el.classList.remove("active"));
+                        contents.forEach(el => el.classList.remove("active"));
+
+                        document.querySelector(`#${id}`).classList.add("active");
+                        this.classList.add("active");
+                    });
+                })
+            },
+            // 스와이퍼 이벤트
+            swiperEvt : function(){
+                detailJS.actorSwiper = new Swiper(".swiper-container.actor_swiper", {
+                    slidesPerView: "auto",
+                });
+
+                detailJS.similarSwiper = new Swiper(".swiper-container.similar_swiper", {
+                    slidesPerView: "auto",
+                });
+            },
+            setWordEvt : function(){
+                const btnLink = document.querySelectorAll('.btn_link');
+                let storage = window.localStorage.getItem("movie");
+                storage = storage != null ? JSON.parse(storage) : [];
+
+                btnLink.forEach((el, idx) => {
+                    btnLink[idx].addEventListener('click', function(e){
+                        storage.unshift(this.getAttribute('name'));
+                        let nameArr = [...new Set(storage)];
+                        nameArr = JSON.stringify(nameArr);
+                        window.localStorage.setItem("movie", nameArr);
+                    });
+                });
+            },
+            init : function(){
+                this.getParameter();
+                this.tabEvt();
+                this.swiperEvt();
+            },
+        }
+        detailJS.init();
+    </script>
+</body>
+</html>

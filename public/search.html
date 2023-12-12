@@ -1,69 +1,316 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="documentTitle">검색페이지</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/common.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
+    <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
+
+    <style>
+        /* root css */
+        :root{
+            --color-white : #efefef; 
+            --color-gray : ##98a4b7; 
+            --color-darkgray : #586a85; 
+            --color-darkblue : #101322;
+        }
+
+        /* icon css */
+        .icon{display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100% 100%; object-fit: contain; }
+        .icon_delete{width: 16px; height: 16px; background-image: url(https://static.kinolights.com/icon/ic-close-navy05.svg);}
+
+        /* common css */
+        *{box-sizing: border-box; text-decoration: none;}
+        body{background-color: var(--color-darkblue); color: var(--color-white);}
+        main{padding: 56px 0;}
+        img{display: block; width: 100%;}
+        fieldset{border:none;}
+        .inner{max-width: 700px; margin: 0 auto;}
+        .sec .title{margin-bottom: 20px; font-size: 18px; color: var(--color-white); font-weight: 700;}
+
+        /* search box*/
+        .sec_search{margin-bottom: 50px;}
+        .sec_search .search_box{position: relative; margin-bottom: 30px; padding: 10px 0;}
+        .sec_search #search_input{ width: 100%; height: 48px; padding-left: 41px; background: url(https://static.kinolights.com/icon/search_navy08.svg) 10px no-repeat #25304a; border: none; border-radius: 8px; color: var(--color-white);}
+        .sec_search .btn_reset{display: none; position: absolute; top: 50%; transform: translateY(-50%); right: 10px; cursor: pointer;}
+
+        .sec_search .word_list{display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
+        .sec_search .word{display: inline-flex; justify-content: center; align-items: center; padding: 3px 10px; border-radius: 50px; font-size: 12px; color: #fff; background-color: #25304a; text-transform: uppercase;}
+        .sec_search .word span{line-height: 1.4em;}
+        .sec_search .btn_delete{display: inline-block; width: 16px; height: 16px; cursor: pointer;}
+
+        /* search result */
+        .sec_result{margin-bottom: 70px;}
+        .sec_result .search_list_wrap{display: none;}
+        .sec_result .searchSwiper{margin-bottom: 50px;}
+        .sec_result .search_list_wrap .item{width: 200px; margin-right: 20px;}
+        .sec_result .search_list_wrap .item .img_box{margin-bottom: 10px; border-radius: 8px; overflow: hidden;}
+        .sec_result .search_list_wrap .item .title{display: -webkit-box; display: -ms-flexbox; margin-bottom: 5px; min-height:38px; overflow:hidden; vertical-align:top; text-overflow: ellipsis; word-break:break-all; -webkit-box-orient:vertical; -webkit-line-clamp:2; font-size: 14px; line-height: 1.3em; color: var(--color-white); font-weight: 700; }
+        .sec_result .search_list_wrap .item .date{ font-size:12px; font-weight: 500; color: var(--color-white);}
+        .sec_result .search_list_wrap .btn_link{display: block;}
+
+
+    </style>
 </head>
 <body>
+    <header class="header-wrap">
+      <a href="/index.html"><img src="/images/logo.svg"></a>
+    </header>
+    <main id="wrap">
+        <section class="sec_search sec">
+            <div class="inner">
+                <fieldset class="search_box">
+                    <input type="text" id="search_input" oninput="searchJS.searchTypingEvt(value);" onkeydown="searchJS.searchEvt(value)" autocomplete="off" placeholder="작품명을 입력하세요.">
+                    <button  type="button" class="btn_reset">
+                        <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5.234-3.766a.797.797 0 00-.618-.232.907.907 0 00-.7.264L12 10.714 9.552 8.266a.907.907 0 00-.7-.264.797.797 0 00-.85.85.907.907 0 00.264.7L10.714 12l-2.448 2.448a.907.907 0 00-.264.7.797.797 0 00.85.85.907.907 0 00.7-.264L12 13.286l2.448 2.448c.192.192.448.28.7.264a.797.797 0 00.85-.85.907.907 0 00-.264-.7L13.286 12l2.448-2.448a.907.907 0 00.264-.7.797.797 0 00-.232-.618z" fill="#98A4B7"></path>
+                        </svg>
+                    </button>
+                </fieldset>
+                <div class="search_word">
+                    <h2 class="title">최근 본 컨텐츠</h2>
+                    <ul class="word_list"></ul>
+                </div>
+            </div>
+        </section>
 
- 
+        <section class="sec_result sec">
+            <div class="inner">
+                <div class="search_intro">
+                    <h2 class="title">어떤 작품을 찾으세요?</h2>
+                </div>
+                <div class="search_list_wrap">
+                    <div class="swiper-container searchSwiper" data-category="movie">
+                        <h2 class="title">영화</h2>
+                        <ul class="search_list swiper-wrapper"></ul>
+                    </div>
+                    <div class="swiper-container searchSwiper" data-category="tv">
+                        <h2 class="title">TV</h2>
+                        <ul class="search_list swiper-wrapper"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- 필수 호출 script -->
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  const firebaseConfig = {
-  apiKey: "AIzaSyBPwBvkUab2QHIgqTPODBIC8gWWowDohjM",
-  authDomain: "oneul-9b3e4.firebaseapp.com",
-  databaseURL: "https://oneul-9b3e4-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "oneul-9b3e4",
-  storageBucket: "oneul-9b3e4.appspot.com",
-  messagingSenderId: "993417131341",
-  appId: "1:993417131341:web:ce271d5bffa75a7d42f304"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
-<!-- 필수 호출 script -->
+        <section class="sec_banner sec">
+            <div class="inner">
+                <div class="ad_box">
+                    <a href="/">
+                        <img src="https://static.kinolights.com/search/banner_popcorn.svg" alt="팝콘 획득 하려면 어떻게 해야 하나요?">
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer-wrap">
+        <div class="navigator">
+          <a href="/index.html" class="nav-item home"><span class="nav-txt">홈</span></a>
+          <a href="/search.html" class="nav-item search"><span class="nav-txt">검색</span></a>
+          <a href="/list.html" class="nav-item community"><span class="nav-txt">커뮤니티</span></a>
+          <a href="/mypage.html" class="nav-item my-page"><span class="nav-txt">MY</span></a>
+        </div>
+    </footer>
 
-<main id="contents">
-  <header class="header-wrap">
-    <a href="/index.html"><img src="/images/logo.svg"></a>
-  </header>
-  <section class="content">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script>
 
- 검색
+        /*   env   */ 
+        const user = {
+            APIKEY : "api_key=4440ab34848ee6aa6bd8890d39ed2b25",
+            LANGUAGE : "language=ko",
+            BASEURL : "https://api.themoviedb.org/3",
+            Authorization : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDQwYWIzNDg0OGVlNmFhNmJkODg5MGQzOWVkMmIyNSIsInN1YiI6IjY1NTk3OTUzYjU0MDAyMTRkODJkNTBhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ux96P5Zr2-PMRUrvFbvlmceFWnZnAXQZs2ceylVCNDs`
+        }
+
+        /*   class Tmdb   */ 
+        class Tmdb{
+            constructor(data, category){
+                this.videoList = data;
+            }
+            searchRender(data, category){
+                const searchIntroTitle = document.querySelector(".search_intro .title");
+                const searchListWrap = document.querySelector(".search_list_wrap");
+
+                const movieSwiper = document.querySelector(`[data-category=movie]`)
+                const tvSwiper = document.querySelector(`[data-category=tv]`);
+                const movieSwiperWrap = movieSwiper.querySelector(`.swiper-wrapper`)
+                const tvSwiperWrap = tvSwiper.querySelector(`.swiper-wrapper`);
+
+                let filterData = data.results.filter((item) => item.poster_path != null)
+
+                // 인기순 sort
+                filterData = filterData.sort(function(a, b){
+                    let dataA = a.popularity;
+                    let dataB = b.popularity;
+
+                    if(dataA > dataB) return -1;
+                    if(dataA === dataB) return 0;
+                    if(dataA < dataB) return 1;
+                })
+
+                if(filterData.length >= 1){
+                    searchListWrap.style.display = "block";
+                    searchIntroTitle.style.display = "none";
+                    movieSwiperWrap.innerHTML = "";
+                    tvSwiperWrap.innerHTML = "";
+
+                    filterData.forEach(item => {
+                        let html = `
+                            <li class="swiper-slide item" data-id="${item.id}" data-genre-id=${item.genre_ids} data-type=${item.media_type}>
+                                <a href="/detail.html?id=${item.id}&type=${item.media_type}" name="${item.media_type == "movie" ? item.title : item.name}" class="btn_link" title="${item.media_type == "movie" ? item.title : item.name} 상세 페이지로 이동">
+                                    <div class="img_box">
+                                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${item.poster_path}" alt="${item.media_type == "movie" ? item.title : item.name} 포스터">
+                                    </div>
+                                    <div class="text_box">
+                                        <p class="title">${item.media_type == "movie" ? item.title : item.name} </p>
+                                        <p class="date">${item.media_type == "movie" ? item.release_date : item.first_air_date}</p>
+                                    </div>
+                                <a>
+                            </li>
+                        `;
+                        
+                        let curSwiper = item.media_type == "movie" ? movieSwiperWrap : tvSwiperWrap;
+                        curSwiper.insertAdjacentHTML("beforeend", html);
+                    });
+
+                    searchJS.searchSwiper.forEach((item, idx)=> {
+                        searchJS.searchSwiper[idx].update();
+                        movieSwiperWrap.childNodes.length != 0 ? movieSwiper.style.display = 'block' : movieSwiper.style.display = 'none';
+                        tvSwiperWrap.childNodes.length != 0 ? tvSwiper.style.display = 'block' : tvSwiper.style.display = 'none';
+                    });
 
 
-  </section>
-  <footer class="footer-wrap">
-    <div class="navigator">
-        <a href="/index.html" class="nav-item home"><span class="nav-txt">홈</span></a>
-        <a href="/search.html" class="nav-item search active"><span class="nav-txt">검색</span></a>
-        <a href="/list.html" class="nav-item community"><span class="nav-txt">커뮤니티</span></a>
-        <a href="/mypage.html" class="nav-item my-page"><span class="nav-txt">MY</span></a>
-    </div>
-  </footer>
-</main>
+                    searchJS.setWordEvt();
+                }else{
+                    searchListWrap.style.display = "none";
+                    searchIntroTitle.style.display = "block";
+                    searchIntroTitle.innerHTML = "검색결과가 없습니다."
+                }
+                
+            }
+        }
 
+        /*   API   */ 
+        const TMDB = new Tmdb();
+        const callAPI = {
+            options : {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: user.Authorization
+                }
+            },
+            searchApi : function(value){
+                fetch(`${user.BASEURL}/search/multi?query=${value}&adult=false&${user.LANGUAGE}&page=1`,callAPI.options)
+                .then(data => data.json())
+                .then(data => {
+                    TMDB.searchRender(data);
+                })
+                .catch(err => console.error(err));
+            },
+        }
 
+        /*   JS   */ 
+        const searchJS = {
+            searchSwiper : "",
+            swiperEvt : function(){
+                searchJS.searchSwiper = new Swiper(".swiper-container.searchSwiper", {
+                    slidesPerView: "auto",
+                });
+            },
+            searchEvt : function(value){
+                const btnReset = document.querySelector(".btn_reset");
+                const searchIntroTitle = document.querySelector(".search_intro .title");
 
-  <script>
-    // db 랑 통신하는 문법 연결
-    const db = firebase.firestore();
-    const storage = firebase.storage();
+                if(event.keyCode === 13) {
+                    if(value != undefined && value != "") callAPI.searchApi(value);
+                }
+            },
+            searchTypingEvt : function(value){
+                const btnReset = document.querySelector(".btn_reset");
 
+                if(value?.length >= 1){
+                    btnReset.style.display = "block";
+                }else{
+                    btnReset.style.display = "none";
+                }  
+            },
+            searchResetEvt : function(){
+                const saerchInout = document.querySelector("#search_input");
+                const btnReset = document.querySelector(".btn_reset");
+                const searchIntroTitle = document.querySelector(".search_intro .title");
+                const searchListWrap = document.querySelector(".search_list_wrap");
 
+                btnReset.addEventListener("click", () => {
+                    saerchInout.value = "";
+                    btnReset.style.display = "none";
+                    searchListWrap.style.display = "none";
+                    searchIntroTitle.style.display = "block";
+                    searchIntroTitle.innerHTML = "어떤 작품을 찾으세요?";
+                })
+            },
+            setWordEvt : function(){
+                const btnLink = document.querySelectorAll('.btn_link');
+                let storage = window.localStorage.getItem("movie");
+                storage = storage != null ? JSON.parse(storage) : [];
 
-    
-  </script>
-  
+                btnLink.forEach((el, idx) => {
+                    btnLink[idx].addEventListener('click', function(e){
+                        storage.unshift(this.getAttribute('name'));
+                        let nameArr = [...new Set(storage)];
+                        nameArr = JSON.stringify(nameArr);
+                        window.localStorage.setItem("movie", nameArr);
+                    });
+                });
+            },
+            getWordEvt : function(){
+                const wordWarp = document.querySelector(".search_word");
+                const wordList = document.querySelector(".word_list");
+
+                let storage = window.localStorage.getItem("movie");
+                storage = JSON.parse(storage);
+                let nameArr = [...new Set(storage)];
+
+                nameArr.forEach((el, idx) => {
+                    let html = `
+                        <li class="word">
+                            <span>${el}</span>
+                            <button class="btn_delete" data-name="${el}" title="${el} 삭제하기"><i class="icon icon_delete"></i></button>
+                        </li>
+                    `;
+                    wordList.insertAdjacentHTML("beforeend", html);
+                });
+
+                const btnDelete = document.querySelectorAll('.btn_delete');
+
+                btnDelete.forEach((el, idx) => {
+                    btnDelete[idx].addEventListener('click', function(){
+                        let curName = this.getAttribute('data-name');
+                        this.parentNode.style.display = "none"; 
+
+                        nameArr = nameArr.filter((el) => el != curName);
+                        let arrString = JSON.stringify(nameArr);
+                        window.localStorage.setItem("movie", arrString);
+
+                        if(nameArr == "") wordWarp.style.display = 'none';
+                    });
+                });
+
+                if(btnDelete.length == 0) wordWarp.style.display = 'none';
+            },
+            init : function(){
+                this.swiperEvt();
+                // this.searchResetEvt();
+                this.getWordEvt();
+            }
+        }
+        searchJS.init();
+        
+       
+    </script>
 </body>
 </html>
