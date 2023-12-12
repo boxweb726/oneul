@@ -5,7 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>오늘뭐볼까?</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper.min.css">
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
   <meta property="og:title" content="오늘뭐볼까?"> 
   <meta property="og:url" content="https://oneul-9b3e4.web.app/">
   <meta property="og:type" content="website">
@@ -22,6 +24,8 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="js/main.js"></script>
 <script>
   const firebaseConfig = {
   apiKey: "AIzaSyBPwBvkUab2QHIgqTPODBIC8gWWowDohjM",
@@ -41,13 +45,38 @@
   <header class="header-wrap">
     <a href="/index.html"><img src="/images/logo.svg"></a>
   </header>
-  <section class="content">
-    
-
-    홈홈홈홈홈홈홈홈홈ddd0000
-
-
-  </section>
+  <div class="content">
+    <section class="ranking_all">
+      <div class="main-text">
+        <a href="#" class="link">
+          <h2 class="title">인기작 TOP 10</h2>
+        </a>
+      </div>
+      <div class="swiper">
+        <ul class="swiper-wrapper all-wrapper"></ul>
+      </div>
+    </section>
+    <section class="ranking_movie">
+      <div class="main-text">
+        <a href="#" class="link">
+          <h2 class="title">영화 랭킹</h2>
+        </a>
+      </div>
+      <div class="swiper">
+        <ul class="swiper-wrapper movie-wrapper"></ul>
+      </div>
+    </section>
+    <section class="ranking_tv">
+      <div class="main-text">
+        <a href="#" class="link">
+          <h2 class="title">TV 랭킹</h2>
+        </a>
+      </div>
+      <div class="swiper">
+        <ul class="swiper-wrapper tv-wrapper"></ul>
+      </div>
+    </section>
+  </div>
   <footer class="footer-wrap">
     <div class="navigator">
         <a href="/index.html" class="nav-item home active"><span class="nav-txt">홈</span></a>
