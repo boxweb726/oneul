@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(){
     const apiKey = "4440ab34848ee6aa6bd8890d39ed2b25";
     const allpiUrl = `https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&language=ko-KR`;
-    // const moiveApiUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=ko-KR&page=1`;
-    const moiveApiUrl = `https://api.themoviedb.org/3/trending/movie/day??api_key=${apiKey}&language=ko-KR&page=1`;
-    const tvApiUrl = `https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=ko-KR&page=1`;
+    const moiveApiUrl = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&language=ko-KR&page=1`;
+    const tvApiUrl = `https://api.themoviedb.org/3/trending/tv/day?api_key=${apiKey}&language=ko-KR&page=1`;
     const options = { method: "GET", headers: { accept: "application/json" } };
 
     // 모든 랭킹 호출 함수
@@ -42,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function(){
           const tvCard = createCard(data);
           tvContainer.appendChild(tvCard);
         });
-        console.log(topData);
       })
       .catch((err) => console.error(err));
   
@@ -51,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
       const card = document.createElement("li");
       card.classList.add("swiper-slide");
   
-      card.innerHTML = `<a href="./detail.html?id=${data.id}" class="card-wrap">
+      card.innerHTML = `<a href="./detail.html?id=${data.id}&type=${data.media_type}" class="card-wrap">
         <div class="img">
           <img src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="${data.title ? data.title : data.name}">
         </div>
