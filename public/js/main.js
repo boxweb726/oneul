@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="img">
           <img src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="${data.title ? data.title : data.name}">
         </div>
-        <p class="title">${data.title ? data.title : data.name}</p>
+        <p class="title2">${data.title ? data.title : data.name}</p>
         <p class="desc">${data.overview}</p>
         <p class="average">평점 ${data.vote_average.toFixed(1)}</p>
       </a>`;
@@ -71,8 +71,13 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="img">
           <img src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="${data.title ? data.title : data.name}">
         </div>
-        <p class="title">${data.title ? data.title : data.name}</p>
+        <div class="title-wrap">
+          <p class="title">${data.title ? data.title : data.name}</p>
+          <p class="rating">평점 ${data.vote_average.toFixed(1)}</p>
+        </div>
       </a>`;
+
+      console.log(data)
   
       return card;
     }
@@ -92,14 +97,14 @@ document.addEventListener("DOMContentLoaded", function(){
     
       // MOIVE Swiper
       const movieSwiper = new Swiper(".ranking_movie .swiper", {
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 16,
         loop: true,
       });
     
       // TV Swiper
       const tvSwiper = new Swiper(".ranking_tv .swiper", {
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 16,
         loop: true,
       });
