@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function(){
         const allCard = createPopCard(data, index + 1);
         allContainer.appendChild(allCard);
       });
-  
-      console.log(topData);
     })
     .catch((err) => console.error(err));
   
@@ -43,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function(){
           const tvCard = createCard(data);
           tvContainer.appendChild(tvCard);
         });
+        console.log(topData);
       })
       .catch((err) => console.error(err));
   
@@ -51,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function(){
       const card = document.createElement("li");
       card.classList.add("swiper-slide");
   
-      card.innerHTML = `<a href="./detail/${data.id}" class="card-wrap">
+      card.innerHTML = `<a href="./detail.html?id=${data.id}" class="card-wrap">
         <div class="img">
           <img src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="${data.title ? data.title : data.name}">
         </div>
@@ -67,8 +66,8 @@ document.addEventListener("DOMContentLoaded", function(){
     function createPopCard(data, ranking) {
       const card = document.createElement("li");
       card.classList.add("swiper-slide");
-  
-      card.innerHTML = `<a href="./detail/${data.id}" class="card-wrap">
+
+      card.innerHTML = `<a href="./detail.html?id=${data.id}&type=${data.media_type}" class="card-wrap">
         <p class="ranking">${ranking}</p>
         <div class="img">
           <img src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="${data.title ? data.title : data.name}">
