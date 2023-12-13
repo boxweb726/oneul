@@ -4,13 +4,15 @@
 .card-wrap {display: block;}
 .card-wrap .img {display: inline-block;position: relative;margin-bottom: 14px;}
 .card-wrap .img img {border-radius: 6px;}
-.card-wrap .title {margin-bottom: 12px;padding: 0 8px;font-size: 20px;line-height: 20px;color: #efefef;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-.card-wrap .desc {margin-bottom: 8px;font-size: 15px;font-weight: 700;line-height: 21px;color: #d4d9e1;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;word-break: break-all;}
+.card-wrap .title {margin-bottom: 12px; font-size: 18px; line-height: 20px; color: #efefef; font-weight: 600; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: -2px;}
+.card-wrap .desc {margin-bottom: 8px;font-size: 15px;font-weight: 100;line-height: 21px;color: #d4d9e1;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;word-break: break-all;}
 .card-wrap .average {font-size: 15px;line-height: 21px;color: #d4d9e1;}
-.card-wrap .ranking {margin-right: 12px;font-size: 24px;line-height: 20px;color: #efefef;}
+.card-wrap .ranking {margin-right: 18px; font-size: 25px; line-height: 20px; color: #efefef; font-style: italic; font-weight: 800}
 .ranking_all .card-wrap {display: flex;align-items: center;height: 100%;}
 .ranking_all .swiper {height: 300px;}
 .ranking_all .swiper .swiper-slide {height: 150px;}
 .ranking_all .card-wrap .img {width: 70px;height: 100%;margin-right: 12px;margin-bottom: 0;overflow: hidden;}
 .ranking_all .card-wrap .img img {height: 100%;}
 .ranking_all .card-wrap .title {margin-bottom: 0;}
+.all-wrapper { padding: 0 16px }
+.movie-wrapper, .tv-wrapper { padding: 0 0 0 16px }

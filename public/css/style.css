@@ -36,19 +36,7 @@ img {position: relative; width: 100%;}
 
 
 .header-wrap {
-  position:fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  top:0;
-  max-width: 700px;
-  background: #101322;
-  height: 56px;
-  padding: 0 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
+  position: fixed; left: 50%; transform: translateX(-50%); width: 100%; top: 0; max-width: 700px; /* background: #101322; */ height: 56px; padding: 0 16px; display: flex; justify-content: center; align-items: center; margin: 0 auto; z-index: 10; backdrop-filter: blur(7px); background-color: rgba(0,0,0,.2);
 }
 
 .content {
@@ -62,6 +50,7 @@ img {position: relative; width: 100%;}
   bottom: 0;
   background: #101322;
   left: 0;
+  z-index: 10;
 }
 
 .navigator {
