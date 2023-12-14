@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(){
     const apiKey = "4440ab34848ee6aa6bd8890d39ed2b25";
     const allpiUrl = `https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&language=ko-KR`;
-    const moiveApiUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=ko-KR&page=1`;
-    const tvApiUrl = `https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=ko-KR&page=1`;
+    const moiveApiUrl = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&language=ko-KR&page=1`;
+    const tvApiUrl = `https://api.themoviedb.org/3/trending/tv/day?api_key=${apiKey}&language=ko-KR&page=1`;
     const options = { method: "GET", headers: { accept: "application/json" } };
-  
+
     // 모든 랭킹 호출 함수
     fetch(allpiUrl, options)
     .then(response => response.json())
@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function(){
         const allCard = createPopCard(data, index + 1);
         allContainer.appendChild(allCard);
       });
-  
-      console.log(topData);
     })
     .catch((err) => console.error(err));
   
@@ -51,11 +49,11 @@ document.addEventListener("DOMContentLoaded", function(){
       const card = document.createElement("li");
       card.classList.add("swiper-slide");
   
-      card.innerHTML = `<a href="./detail/${data.id}" class="card-wrap">
+      card.innerHTML = `<a href="./detail.html?id=${data.id}&type=${data.media_type}" class="card-wrap">
         <div class="img">
           <img src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="${data.title ? data.title : data.name}">
         </div>
-        <p class="title">${data.title ? data.title : data.name}</p>
+        <p class="title2">${data.title ? data.title : data.name}</p>
         <p class="desc">${data.overview}</p>
         <p class="average">평점 ${data.vote_average.toFixed(1)}</p>
       </a>`;
@@ -67,14 +65,19 @@ document.addEventListener("DOMContentLoaded", function(){
     function createPopCard(data, ranking) {
       const card = document.createElement("li");
       card.classList.add("swiper-slide");
-  
-      card.innerHTML = `<a href="./detail/${data.id}" class="card-wrap">
+
+      card.innerHTML = `<a href="./detail.html?id=${data.id}&type=${data.media_type}" class="card-wrap">
         <p class="ranking">${ranking}</p>
         <div class="img">
           <img src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="${data.title ? data.title : data.name}">
         </div>
-        <p class="title">${data.title ? data.title : data.name}</p>
+        <div class="title-wrap">
+          <p class="title">${data.title ? data.title : data.name}</p>
+          <p class="rating">평점 ${data.vote_average.toFixed(1)}</p>
+        </div>
       </a>`;
+
+      console.log(data)
   
       return card;
     }
@@ -94,14 +97,14 @@ document.addEventListener("DOMContentLoaded", function(){
     
       // MOIVE Swiper
       const movieSwiper = new Swiper(".ranking_movie .swiper", {
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 16,
         loop: true,
       });
     
       // TV Swiper
       const tvSwiper = new Swiper(".ranking_tv .swiper", {
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 16,
         loop: true,
       });
