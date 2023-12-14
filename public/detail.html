@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -166,7 +166,7 @@
             }
             // 영화정보 랜더링
             infoRender(data, type){
-                console.log(data, '영화정보')
+                // console.log(data, '영화정보')
                 const documentTitle = document.querySelector('#documentTitle');
                 const textBox = document.querySelector(".sec_info .text_box");
                 const title = document.querySelector(".sec_info .title");
@@ -198,7 +198,7 @@
                 const videoBox = document.querySelector(".video_box")
                 const iframe = document.querySelector(".video_box iframe")
 
-                console.log(data, '예고편');
+                // console.log(data, '예고편');
                 //예고편 없으면 삭제 
                 if(data.results.length == 0) videoBox.style.display = "none";
 
@@ -238,7 +238,7 @@
             }
             // 추천작 랜더링
             similarRender(data){
-                console.log(data, "추천영화")
+                // console.log(data, "추천영화")
                 let similar = data.results;
                 const similarSwiper = document.querySelector(".similar_swiper .swiper-wrapper")
 
@@ -368,6 +368,7 @@
                     slidesPerView: "auto",
                 });
             },
+            // 최근 본 영화 저장
             setWordEvt : function(){
                 const btnLink = document.querySelectorAll('.btn_link');
                 let storage = window.localStorage.getItem("movie");
