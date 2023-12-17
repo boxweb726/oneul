@@ -4,21 +4,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>오늘뭐볼까?</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper.min.css">
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/style.css" >
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/common.css">
   <meta property="og:title" content="오늘뭐볼까?"> 
   <meta property="og:url" content="https://oneul-9b3e4.web.app/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="/images/ogimg.png"> 
   <meta property="og:description" content="영화리뷰 플랫폼 오늘뭐볼까?">
+  <title>오늘뭐볼까?</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper.min.css">
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/style.css" >
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <script src="./js/main.js"></script>
 </head>
 <body>
-
- 
 
 <!-- 필수 호출 script -->
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
@@ -27,7 +26,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="js/main.js"></script>
+
 <script>
   const firebaseConfig = {
   apiKey: "AIzaSyBPwBvkUab2QHIgqTPODBIC8gWWowDohjM",
@@ -43,7 +42,7 @@
 </script>
 <!-- 필수 호출 script -->
 
-<main id="contents">
+<div id="contents">
   <header class="header-wrap">
     <a href="/index.html"><img src="/images/logo.svg"></a>
   </header>
@@ -58,6 +57,9 @@
         <ul class="swiper-wrapper all-wrapper"></ul>
       </div>
     </section>
+
+    <section class="coming_movie"></section>
+
     <section class="ranking_movie">
       <div class="main-text">
         <a href="#" class="link">
@@ -87,9 +89,7 @@
         <a href="/mypage.html" class="nav-item my-page"><span class="nav-txt">MY</span></a>
     </div>
   </footer>
-</main>
-
-
+</div>
 
   <script>
     const db = firebase.firestore();
