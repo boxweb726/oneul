@@ -89,10 +89,10 @@ document.addEventListener("DOMContentLoaded", function(){
         spaceBetween: 16,
         loop: true,
         autoHeight: true,
-        autoplay: {
-          delay: 4000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 4000,
+        //   disableOnInteraction: false,
+        // },
       });
     
       // MOIVE Swiper
