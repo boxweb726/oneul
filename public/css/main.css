@@ -15,6 +15,7 @@ ul {margin: 0; padding: 0;}
 .ranking_all .swiper {height: 300px;}
 .ranking_all .card_wrap .img {min-width: 70px; width: 70px;height: 100%;margin-right: 12px;margin-bottom: 0;overflow: hidden;}
 .ranking_all .card_wrap .img img {height: 100%;}
+.ranking_all .title_wrap {width: 100%;}
 .ranking_all .card_wrap .title {margin-bottom: 0;}
 .all-wrapper { padding: 0 16px }
 .movie-wrapper, .tv-wrapper { padding: 0 16px 0 16px; margin: 0 }

@@ -7,34 +7,17 @@ document.addEventListener("DOMContentLoaded", function(){
   const options = { method: "GET", headers: { accept: "application/json" } };
 
     // 모든 랭킹 호출 함수
-  async function fetchData() {
-    try {
-      const response = await fetch(allApiUrl, options);
-      const data = await response.json();
-          
+    fetch(allApiUrl, options)
+    .then(response => response.json())
+    .then((data) => {
       const topData = data.results;
       const allContainer = document.querySelector(".all-wrapper");
-          
       topData.slice(0, 9).forEach((data, index) => {
         const allCard = createPopCard(data, index + 1);
         allContainer.appendChild(allCard);
       });
-    } catch (error) {
-        console.error("데이터를 가져오는 중 오류 발생:", error);
-        // 여기에 더 자세한 오류 처리 또는 사용자 피드백 추가
-    }
-  }
-    // fetch(allApiUrl, options)
-    // .then(response => response.json())
-    // .then((data) => {
-    //   const topData = data.results;
-    //   const allContainer = document.querySelector(".all-wrapper");
-    //   topData.slice(0, 9).forEach((data, index) => {
-    //     const allCard = createPopCard(data, index + 1);
-    //     allContainer.appendChild(allCard);
-    //   });
-    // })
-    // .catch((err) => console.error(err));
+    })
+    .catch((err) => console.error(err));
 
     // 영화 개봉 예정작 호출 함수
     fetch(comingApiUrl, options)
@@ -42,12 +25,12 @@ document.addEventListener("DOMContentLoaded", function(){
     .then((data) => {
       const topData = data.results;
         const comingContainer = document.querySelector(".coming_movie");
-        topData.forEach((data) => {
+        topData.slice(0, 2).forEach((data) => {
           const comingCard = createCommingCard(data);
           comingContainer.appendChild(comingCard);
         });
         
-      // console.log(topData)
+      console.log(topData)
     })
     .catch((err) => console.error(err));
   
@@ -61,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function(){
           const movieCard = createCard(data);
           movieContainer.appendChild(movieCard);
         });
-        console.log(topData, 'ddd')
       })
       .catch((err) => console.error(err));
   
