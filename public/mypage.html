@@ -88,7 +88,6 @@
         uid = user.uid;
         uname = user.displayName;
 
-        console.log(user);
         let query = citiesRef.where("uid", "==", uid).get().then((querySnapshot) => {
         querySnapshot.forEach((doc, i) => {
             $('.list_box').append('<li class="list_item"><p class="list_subject">'+doc.data(i).제목+'</p><span class="list_date">'+doc.data().날짜.toDate().toLocaleDateString()+'</span></li>');
