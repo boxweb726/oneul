@@ -8,7 +8,6 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/common.css" rel="stylesheet">
   <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
-
 </head>
 <body>
 
@@ -38,7 +37,7 @@
 <main id="contents">
   <header class="header-wrap">
     <a href="/list.html" class="back-btn btn">뒤로가기</a>
-    <a href="/index.html"><img src="/images/logo.svg"></a>
+    <a href="/"><img src="/images/logo.svg"></a>
   </header>
   <section class="content">
     <div class="post-view">
@@ -62,28 +61,20 @@
   </footer>
 </main>
 
-
-
   <script>
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-    var 쿼리스트링 = new URLSearchParams(window.location.search);
+    var queryString = new URLSearchParams(window.location.search);
     
-    db.collection('post').doc(쿼리스트링.get('id')).get().then((result)=>{
+    db.collection('post').doc(queryString.get('id')).get().then((result)=>{
         console.log(result.data())
         $('.post-title').html(result.data().제목)
         $('.post-content').html(result.data().내용)
         $('.post-user').html(result.data().이름)
         $('.post-date').html(result.data().날짜.toDate().toLocaleString())
         $('.post-img').attr('src', result.data().이미지);
-    })
-
-    
-
-
-
-    
+    })  
   </script>
   
 </body>
