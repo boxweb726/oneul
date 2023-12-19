@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="document_title">검색페이지</title>
     <link rel="stylesheet" href="./css/reset.css" />
-    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/detail.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
 
     <!-- favicon -->
@@ -13,74 +14,10 @@
 
     <!-- OG -->
     <meta property="og:title" content="오늘뭐볼까?"> 
-    <meta id="og_url" property="og:url" content="https://oneul-9b3e4.web.app/">
+    <meta property="og:url" content="https://oneul-9b3e4.web.app/">
     <meta property="og:type" content="website">
-    <meta id="og_img" property="og:image" content="/images/ogimg.png"> 
-    <meta id="og_desc" property="og:description" content="영화리뷰 플랫폼 오늘뭐볼까?">
-    
-    <style>
-        /* root css */
-        :root{
-            --color-white : #efefef; 
-            --color-gray : #98a4b7; 
-            --color-darkgray : #222934; 
-            --color-darkblue : #101322;
-        }
-
-        /* icon css*/
-        .icon{display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100% 100%; object-fit: contain;}
-        .icon_search{width: 40px; height: 40px; background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNC41NDg2IDYuMDAwMTJDOS44MjczNSA2LjAwMDEyIDYgOS44Mjc0NyA2IDE0LjU0ODdDNiAxOS4yNyA5LjgyNzM1IDIzLjA5NzQgMTQuNTQ4NiAyMy4wOTc0QzE2LjQ0MjggMjMuMDk3NCAxOC4xOTM5IDIyLjQ4MDkgMTkuNjExIDIxLjQzNzlMMjMuNzk0OSAyNS42MjE4QzI0LjI5OTMgMjYuMTI2MiAyNS4xMTcyIDI2LjEyNjIgMjUuNjIxNyAyNS42MjE4QzI2LjEyNjEgMjUuMTE3MyAyNi4xMjYxIDI0LjI5OTUgMjUuNjIxNyAyMy43OTVMMjEuNDM3OCAxOS42MTExQzIyLjQ4MDggMTguMTk0IDIzLjA5NzIgMTYuNDQyOSAyMy4wOTcyIDE0LjU0ODdDMjMuMDk3MiA5LjgyNzQ3IDE5LjI2OTkgNi4wMDAxMiAxNC41NDg2IDYuMDAwMTJaTTguNTgzNDYgMTQuNTQ4N0M4LjU4MzQ2IDExLjI1NDMgMTEuMjU0MiA4LjU4MzU4IDE0LjU0ODYgOC41ODM1OEMxNy44NDMxIDguNTgzNTggMjAuNTEzOCAxMS4yNTQzIDIwLjUxMzggMTQuNTQ4N0MyMC41MTM4IDE2LjE2MDcgMTkuODc0OSAxNy42MjI2IDE4LjgzNTggMTguNjk2NUMxOC44MTEgMTguNzE3OCAxOC43ODY4IDE4Ljc0MDEgMTguNzYzNCAxOC43NjM2QzE4Ljc0IDE4Ljc4NyAxOC43MTc3IDE4LjgxMTEgMTguNjk2NCAxOC44MzU5QzE3LjYyMjUgMTkuODc1MSAxNi4xNjA2IDIwLjUxMzkgMTQuNTQ4NiAyMC41MTM5QzExLjI1NDIgMjAuNTEzOSA4LjU4MzQ2IDE3Ljg0MzIgOC41ODM0NiAxNC41NDg3WiIgZmlsbD0iI2VmZWZlZiIvPgo8L3N2Zz4K);}
-
-        /* common css*/
-        *{box-sizing: border-box; text-decoration: none;}
-        body{background-color: var(--color-darkblue); color: var(--color-white);}
-        main{padding: 56px 0;}
-        img{display: block; width: 100%;}
-        .inner{width: 94%;; max-width: 700px; margin: 0 auto;}
-
-        /* sec_info */
-        .sec_info .inner{position: relative;}
-        .sec_info .nav{display: none;position: absolute; right: 10px; top: 10px; z-index: 3;}
-        .sec_info .bg_box .bg{width: 100%; height: 310px; }
-        .sec_info .bg_box .gradient{ position: absolute; inset: 0; background: linear-gradient(180deg,rgba(16,19,34,0),rgba(16,19,34,.76) 77.19%,var(--color-darkblue) 93.19%),linear-gradient(90deg,rgba(16,19,34,0) 72.46%,rgba(16,19,34,.76) 90.53%,var(--color-darkblue) 98.12%),linear-gradient(270deg,rgba(16,19,34,0) 72.46%,rgba(16,19,34,.76) 90.53%,var(--color-darkblue) 98.12%)}
-        
-        .sec_info .info_box{position: absolute; inset: auto 0 0 0; display: flex; justify-content: space-between; align-items: flex-end;}
-        .sec_info .text_box .type{display: inline-flex; justify-content: center; align-items: center; height: 23px; padding: 0 12px; margin-bottom: 6px; font-size: 13px; font-weight: 600; text-transform: uppercase; border: 1px solid var(--color-white); color: var(--color-white);}
-        .sec_info .text_box .title{margin-bottom: 3px; font-size: 20px; font-weight: 700; line-height: 28px; color: var(--color-white);}
-        .sec_info .text_box .date{margin-bottom: 15px; font-size: 14px; color: var(--color-gray); line-height: 20px; font-weight: 400; letter-spacing: -0.05em;}
-        .sec_info .text_box .tag_list{display: flex; gap: 8px; flex-wrap: wrap;padding:0;}
-        .sec_info .text_box .tag{display: inline-flex; justify-content: center; align-items: center; height: 24px; padding: 0 10px; border-radius: 50px; font-size: 12px; color: #fff; background-color: #25304a; text-transform: uppercase;}
-        .sec_info .poster_box{flex-shrink: 0; width: 100px; border-radius: 8px; overflow: hidden;}
-
-        /* sec_contents */
-        .swiper-wrapper { padding:0;margin:0; }
-        .sec_contents .inner{padding: 0}
-        .sec_contents .tab_btn_wrap{display: flex; border-bottom: 1px solid var(--color-darkgray);}
-        .sec_contents .tab_btn_wrap .btn_tab{display: inline-flex; justify-content: center; align-items: center; height: 37px; width: 120px;color: var(--color-darkgray); cursor: pointer; font-weight: 700;}
-        .sec_contents .tab_btn_wrap .btn_tab.active{position: relative; color: var(--color-white);}
-        .sec_contents .tab_btn_wrap .btn_tab.active::after{content: ''; position: absolute; bottom: -1px; width: 100%; height: 2px; background-color: var(--color-white);}
-        
-        .sec_contents .contents{display: none;}
-        .sec_contents .contents.active{display: block;}
-
-        #summary .sec{padding:40px 0 30px; border-bottom: 1px solid var(--color-darkgray);}
-        #summary .sec .title{ margin: 0 0 10px 0; font-size: 17px; font-weight: 700; line-height: 28px; color: var(--color-white);}
-        #summary .summary_box .summary{font-size: 13px; font-weight: 500; line-height: 1.5em; color: var(--color-white); letter-spacing: -0.05em;}
-
-        #summary .video_wrap{position: relative; padding-bottom: 56.25%;}
-        #summary .video_box iframe{position: absolute; width: 100%; height: 100%;}
-
-        #summary .swiper-container .item{width: 140px; margin-right: 20px;}
-        #summary .swiper-container .item:last-child{margin-right: 0;}
-        #summary .swiper-container .item .img_box{margin-bottom: 10px; border-radius: 8px; overflow: hidden;}
-        #summary .swiper-container .item .text_box{padding-bottom: 4px;}
-        #summary .swiper-container .item .name{margin-bottom: 3px; font-size: 16px; font-weight: 700;}
-        #summary .swiper-container .item .character{font-size: 14px; font-weight: 700; color: #9ba2b7}
-
-        #summary .swiper-container .item .title{display: -webkit-box; display: -ms-flexbox; margin-bottom: 5px; overflow:hidden; vertical-align:top; text-overflow: ellipsis; word-break:break-all; -webkit-box-orient:vertical; -webkit-line-clamp:2; font-size: 14px; line-height: 1.3em; color: #fff; font-weight: 700; }
-        #summary .swiper-container .item .date{ font-size:12px; font-weight: 500; color: #fff;}
-
-    </style>
+    <meta property="og:image" content="/images/ogimg.png"> 
+    <meta property="og:description" content="영화리뷰 플랫폼 오늘뭐볼까?">
 </head>
 <body>
     <header class="header-wrap">
@@ -184,12 +121,6 @@
                 const bg = document.querySelector(".bg_box .bg");
                 const poster = document.querySelector(".poster_box img");
                 const summary = document.querySelector(".summary_box .summary");
-
-                 // OG
-                const ogImg = document.querySelector("#og_img");
-                const ogDesc = document.querySelector("#og_desc");
-                ogImg.setAttribute("content", `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.backdrop_path}`);
-                ogDesc.setAttribute("content", `${type == "movie" ? data.title : data.name} 보러가기`);
                 
                 // 정보 setting
                 documentTitle.innerHTML = `${type == "movie" ? data.title : data.name} 상세페이지`;
