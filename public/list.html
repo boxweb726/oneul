@@ -16,6 +16,9 @@
       <a href="javascript:;" onClick="postUpload()" class="upload-btn btn">글쓰기</a>
     </header>
     <section class="content">
+      <a href="javascript:;" class="ad-ban" onClick="alert('광고문의 : 인피니티(단가비쌈)')">
+        <img src="./images/ban.svg" style="width:100%;">
+      </a>
       <ul class="post-list"></ul>
     </section>
     <footer class="footer-wrap">
@@ -53,7 +56,7 @@
   <script>
     const db = firebase.firestore();
  
-    db.collection('post').get().then((result)=>{
+    db.collection('post').orderBy('날짜','desc').get().then((result)=>{
         result.forEach((doc)=>{
             var 템플릿 = `<li class="post-list-item">
               <article class="post-wrap">

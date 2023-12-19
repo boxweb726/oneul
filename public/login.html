@@ -43,10 +43,12 @@
     
 
     <div class="post-write">
-      <input type="email" placeholder="이메일" id="email" class="oneul-form">
-      <input type="password" placeholder="패스워드" id="pw" class="oneul-form">  
-      <button type="submit" class="oneul-btn" id="login">로그인</button>    
-      <a href="/signup.html" class="login-txt">아이디가 없다면<br> <b style="color:#fff">회원가입</b> 후 이용해보세요!</a>
+      <form id="form">
+        <input type="email" placeholder="이메일" id="email" class="oneul-form" required>
+        <input type="password" placeholder="패스워드" id="pw" class="oneul-form" required>  
+        <button type="submit" class="oneul-btn" id="login">로그인</button>    
+        <a href="/signup.html" class="login-txt">아이디가 없다면<br> <b style="color:#fff">회원가입</b> 후 이용해보세요!</a>  
+      </form>
     </div>
 
 
@@ -68,8 +70,8 @@
     const storage = firebase.storage();
 
     if(localStorage.getItem('user') != null){ 
-      var 뺀거 = localStorage.getItem('user')
-      $('#username').html(JSON.parse(뺀거).displayName)
+      var tempUserInfo = localStorage.getItem('user')
+      $('#username').html(JSON.parse(tempUserInfo).displayName)
     }
 
     firebase.auth().onAuthStateChanged((user)=>{
@@ -89,15 +91,23 @@
     })
 
     // 로그인
-    $('#login').click(function(){
-      var userMail = $('#email').val();
-      var userPassword = $('#pw').val();
-      firebase.auth().signInWithEmailAndPassword(userMail, userPassword).then((result)=>{
-          console.log(result.user)
-          window.location.href = "/list.html"
-      })
-      
+    $('#login').click(function(e){
+      const form = document.querySelector("#form");
+      let state = form.checkValidity();
+      if(!!state){
+        e.preventDefault();
+        var userMail = $('#email').val();
+        var userPassword = $('#pw').val();
+        firebase.auth().signInWithEmailAndPassword(userMail, userPassword).then((result)=>{
+            console.log(result.user)
+            window.location.href = "/list.html"
+        }).catch((error) => {
+          alert('회원정보가 올바르지 않습니다.')
+        })
+      }
     })
+
+      
 
 
 

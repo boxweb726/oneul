@@ -40,10 +40,12 @@
     <a href="#"><img src="/images/logo.svg"></a>
   </header>
   <section class="content h-100">
-    <div class="post-write">
-      <input type="text" placeholder="제목" id="title" class="oneul-form">
-      <textarea id="content" class="oneul-form" placeholder="내용을 입력하세요"></textarea>
-      <button id="send" class="oneul-btn">글등록</button>
+    <div class="post-write h-100">
+      <form id="form" class="h-100 d-flex flex-column">
+        <input type="text" placeholder="제목" id="title" class="oneul-form" required>
+        <textarea id="content" class="oneul-form flex-1" placeholder="내용을 입력하세요" required></textarea>
+        <button type="submit" id="send" class="oneul-btn">글등록</button>
+      </form>
     </div>
   </section>
   <footer class="footer-wrap">
@@ -61,8 +63,12 @@
   <script>
     const db = firebase.firestore();
 
-    $('#send').click(function(){
-      var postData = {
+    $('#send').click(function(e){
+      const form = document.querySelector("#form");
+      let state = form.checkValidity();
+      if(!!state) {
+        e.preventDefault();
+        var postData = {
         제목 : $('#title').val(),
         내용 : $('#content').val(),
         날짜 : new Date(),
@@ -75,6 +81,7 @@
       }).catch((err)=>{
         console.log(err)
       })
+      }
     })
 
     
