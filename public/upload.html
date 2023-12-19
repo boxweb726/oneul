@@ -76,19 +76,40 @@
         var savePath = storageRef.child('image/' + file.name);
         var upload = savePath.put(file);
 
-        var postData = {
-        제목 : $('#title').val(),
-        내용 : $('#content').val(),
-        날짜 : new Date(),
-        uid : JSON.parse(localStorage.getItem('user')).uid,
-        이름 : JSON.parse(localStorage.getItem('user')).displayName,
-      }
-      db.collection('post').add(postData).then((result)=>{
-        console.log(result);
-        window.location.href = "/list.html"
-      }).catch((err)=>{
-        console.log(err)
-      })
+        upload.on( 'state_changed', 
+            // 변화시 동작하는 함수 
+            null, 
+            //에러시 동작하는 함수
+            (error) => {
+              console.error('실패사유는', error);
+            }, 
+            // 성공시 동작하는 함수
+            () => {
+              upload.snapshot.ref.getDownloadURL().then((url) => {
+                console.log('업로드된 경로는', url);
+
+                var postData = {
+                  제목 : $('#title').val(),
+                  내용 : $('#content').val(),
+                  날짜 : new Date(),
+                  uid : JSON.parse(localStorage.getItem('user')).uid,
+                  이름 : JSON.parse(localStorage.getItem('user')).displayName,
+                  이미지 : url,
+                }
+                db.collection('post').add(postData).then((result)=>{
+                  console.log(result);
+                  window.location.href = "/list.html"
+                }).catch((err)=>{
+                  console.log(err)
+                })
+
+
+
+              });
+            }
+        );
+
+        
       }
     })
 

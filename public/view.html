@@ -49,6 +49,7 @@
         <h2 class="post-title"></h2>
         <p class="date"></p>
         <p class="post-content"></p>
+        <img class="post-img">
     </div>
   </section>
   <footer class="footer-wrap">
@@ -75,6 +76,7 @@
         $('.post-content').html(result.data().내용)
         $('.post-user').html(result.data().이름)
         $('.post-date').html(result.data().날짜.toDate().toLocaleString())
+        $('.post-img').attr('src', result.data().이미지);
     })
 
     
