@@ -41,30 +41,13 @@
 
   <main id="contents" class="mypage">
     <div class="mypage_info">
-        <div class="profile_update_area">
-            <div class="user_info">
-                <p class="user_info_text"><span class="user_name"></span>님의 회원정보수정</p>
-            </div>
-            
-            <form id="form">
-              <!-- <div class="user_img">
-                <img src="" alt="">
-              </div>
-              <div class="file_box">
-                <label for="input_file">파일선택</label>
-                <input type="file" name="input_file" id="input_file">
-              </div> -->
-              <input type="email" placeholder="이메일" id="email-new" class="oneul-form" readonly>
-              <input type="password" placeholder="패스워드(6자 이상 입력)" id="pw-new" class="oneul-form" required>  
-              <input type="text" placeholder="이름" id="name-new" class="oneul-form" required>
-            </form> 
-          </div>
-          
-        </div>
-        
-        <div class="btn_area">
-          <!-- <a href="/mypage_delete.html" class="btn_line">탈퇴하기 ></a> -->
-          <button type="submit" class="oneul-btn" id="updateProfile">수정하기</button> 
+        <p class="info_text">정말 탈퇴하실건가요?</p>
+
+    </div>
+    
+    <div class="btn_area">
+        <a href="/mypage.html" class="oneul-btn">취소</a>
+        <a href="javascript:;" title="탈퇴하기" onClick="userDel()" class="oneul-btn">로그아웃</a>
     </div>
   
   </main>
@@ -80,33 +63,18 @@
 
 
   <script>
-    const user = firebase.auth().currentUser;
-
-    firebase.auth().onAuthStateChanged((user)=>{
-        if(user) {
-            uname = user.displayName;
-            uemail = user.email;
-            $('.user_name').text(uname);
-            $('#email-new').val(uemail);
-        }
-    });
+    //탈퇴하기
     
-    $('#updateProfile').click(function(e){
-      const form = document.querySelector("#form");
-      let state = form.checkValidity();
-      if(!!state) {
-        e.preventDefault();
-        var userPassword = $('#pw-new').val();
-        var userName = $('#name-new').val();
-        firebase.auth().currentUser.updateProfile({
-          displayName: userName,
-          userPassword: userPassword
-        }).then(() => {
-          location.href = "/mypage.html"
-        }).catch((error) => {
-        }); 
-      }
-    })
+    const user = firebase.auth().currentUser;
+    function userDel() {
+        firebase.auth().onAuthStateChanged((user)=>{
+            user.delete().then(()=>{
+                location.href='/index.html';
+            }).catch((error)=>{
+    
+            });
+        });
+    }
     
   </script>
   
