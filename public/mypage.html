@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>오늘뭐볼까?</title>
+  <meta property="og:title" content="오늘뭐볼까?"> 
+  <meta property="og:url" content="https://oneul-9b3e4.web.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/ogimg.png"> 
+  <meta property="og:description" content="영화리뷰 플랫폼 오늘뭐볼까?">
   <link href="css/mypage.css" rel="stylesheet">
   <!-- 필수 호출 script -->
   <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
@@ -43,15 +48,11 @@
   
       <section class="list_area">
           <h3 class="list_title">내가 쓴 글</h3>
-          <ul class="list_box">
-              <li class="list_item">1111</li>
-              <li class="list_item">1111</li>
-              <li class="list_item">1111</li>
-          </ul>
+          <ul class="list_box"></ul>
       </section>
+      <a href="javascript:;" onClick="logout()" class="oneul-btn">로그아웃</a>
     </div>
 
-    <a href="javascript:;" onClick="logout()" class="oneul-btn">로그아웃</a>
   
   </main>
     
@@ -68,6 +69,26 @@
   <script>
     const db = firebase.firestore();
     const storage = firebase.storage();
+    const citiesRef = db.collection('post');
+
+    let uid, uname;
+
+
+    firebase.auth().onAuthStateChanged((user)=>{
+      if (!user) {
+        location.href='/login.html';
+      } else if(user) {
+        uid = user.uid;
+        uname = user.displayName;
+
+        var query = citiesRef.where("uid", "==", uid).get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc, i) => {
+            $('.list_box').append('<li class="list_item"><p class="list_subject">'+doc.data(i).제목+'</p><span class="list_date">'+doc.data().날짜.toDate().toLocaleDateString()+'</span></li>');
+        });
+    })
+      }
+    })
 
     if(localStorage.getItem('user') != null){ 
       let user = localStorage.getItem('user')
@@ -77,19 +98,13 @@
       $('.user_img').html(username.substring(0,1))
     }
 
-    console.log(db.collection('users').where('uid').get());
-    firebase.auth().onAuthStateChanged((user)=>{
-      if (!user) {
-        $('.mypage').append('<a href="/login.html" class="oneul-btn">로그인</a><a href="/signup.html" class="oneul-btn">회원가입</a>')
-      } else {
-        localStorage.setItem('user', JSON.stringify(user))
-      }
-    })
-
     function logout() {
-      firebase.auth().signOut();
-      localStorage.removeItem('user');
-      location.reload(true);
+      firebase.auth().signOut().then(function(){
+        localStorage.removeItem('user');
+        location.href='/index.html';
+      }).catch(function(error){
+
+      });
     }
     
   </script>
