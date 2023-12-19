@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="documentTitle">검색페이지</title>
+    <title id="document_title">검색페이지</title>
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
+
+    <!-- favicon -->
     <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
+
+    <!-- OG -->
+    <meta property="og:title" content="오늘뭐볼까?"> 
+    <meta id="og_url" property="og:url" content="https://oneul-9b3e4.web.app/">
+    <meta property="og:type" content="website">
+    <meta id="og_img" property="og:image" content="/images/ogimg.png"> 
+    <meta id="og_desc" property="og:description" content="영화리뷰 플랫폼 오늘뭐볼까?">
     
     <style>
         /* root css */
@@ -151,9 +160,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <script>
-
         /*   env   */ 
-        const user = {
+        const USER = {
             APIKEY : "api_key=4440ab34848ee6aa6bd8890d39ed2b25",
             LANGUAGE : "language=ko",
             BASEURL : "https://api.themoviedb.org/3",
@@ -168,7 +176,7 @@
             // 영화정보 랜더링
             infoRender(data, type){
                 // console.log(data, '영화정보')
-                const documentTitle = document.querySelector('#documentTitle');
+                const documentTitle = document.querySelector('#document_title');
                 const textBox = document.querySelector(".sec_info .text_box");
                 const title = document.querySelector(".sec_info .title");
                 const date = document.querySelector(".sec_info .date");
@@ -176,6 +184,12 @@
                 const bg = document.querySelector(".bg_box .bg");
                 const poster = document.querySelector(".poster_box img");
                 const summary = document.querySelector(".summary_box .summary");
+
+                 // OG
+                const ogImg = document.querySelector("#og_img");
+                const ogDesc = document.querySelector("#og_desc");
+                ogImg.setAttribute("content", `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.backdrop_path}`);
+                ogDesc.setAttribute("content", `${type == "movie" ? data.title : data.name} 보러가기`);
                 
                 // 정보 setting
                 documentTitle.innerHTML = `${type == "movie" ? data.title : data.name} 상세페이지`;
@@ -193,6 +207,7 @@
                     let tag = `<li class="tag">#${el.name}</li>`
                     tagList.insertAdjacentHTML("beforeend", tag);
                 });
+
             }
             // 예고편 랜더링
             videoRender(data){
@@ -283,12 +298,12 @@
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: user.Authorization
+                    Authorization: USER.Authorization
                 }
             },
             // 영화정보 조회
             infoApi : function(id, type){
-                fetch(`${user.BASEURL}/${type}/${id}?${user.LANGUAGE}`, callAPI.options)
+                fetch(`${USER.BASEURL}/${type}/${id}?${USER.LANGUAGE}`, callAPI.options)
                 .then(data => data.json())
                 .then(data => {
                     TMDB.infoRender(data, type);
@@ -297,7 +312,7 @@
             },
             // 예고편 조회
             videoApi : function(id, type){
-                fetch(`${user.BASEURL}/${type}/${id}/videos?${user.LANGUAGE}`, callAPI.options)
+                fetch(`${USER.BASEURL}/${type}/${id}/videos?${USER.LANGUAGE}`, callAPI.options)
                 .then(data => data.json())
                 .then(data => {
                     TMDB.videoRender(data, type);
@@ -306,7 +321,7 @@
             },
             // 배우 조회
             actorApi : function(id, type){
-                fetch(`${user.BASEURL}/${type}/${id}/credits?${user.LANGUAGE}`, callAPI.options)
+                fetch(`${USER.BASEURL}/${type}/${id}/credits?${USER.LANGUAGE}`, callAPI.options)
                 .then(data => data.json())
                 .then(data => {
                     TMDB.actorRender(data, type);
@@ -315,7 +330,7 @@
             },
             // 트렌드 조회
             similarApi : function(id, type){
-                fetch(`${user.BASEURL}/trending/${type}/week?${user.LANGUAGE}`, callAPI.options)
+                fetch(`${USER.BASEURL}/trending/${type}/week?${USER.LANGUAGE}`, callAPI.options)
                 .then(data => data.json())
                 .then(data => {
                     TMDB.similarRender(data, type);
@@ -329,6 +344,7 @@
         const detailJS = {
             actorSwiper : undefined,
             similarSwiper : undefined,
+            
             // URL 처리
             getParameter: function() {
                 let idRegexp = /[^0-9]/g;
@@ -384,6 +400,7 @@
                     });
                 });
             },
+          
             init : function(){
                 this.getParameter();
                 this.tabEvt();
