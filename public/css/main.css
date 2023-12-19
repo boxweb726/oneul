@@ -20,4 +20,4 @@ ul {margin: 0; padding: 0;}
 .all-wrapper { padding: 0 16px }
 .movie-wrapper, .tv-wrapper { padding: 0 16px 0 16px; margin: 0 }
 .banner {position: relative;}
-.banner .title_wrap{position: absolute; top: 0;}
+.banner .banner_wrap{display: block;}

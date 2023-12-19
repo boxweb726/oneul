@@ -6,21 +6,35 @@ document.addEventListener("DOMContentLoaded", function(){
   const comingApiUrl = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=ko-KR&page=1`;
   const options = { method: "GET", headers: { accept: "application/json" } };
 
-  // 모든 랭킹 호출 함수
-
   async function fetchData(apiUrl, containerSelector, isTopData) {
     try {
-        const response = await fetch(apiUrl, options);
-        const data = await response.json();
+      const response = await fetch(apiUrl, options);
+      const data = await response.json();
         
-        const topData = isTopData ? data.results.slice(0, 9) : data.results;
-        const container = document.querySelector(containerSelector);
+      const topData = isTopData ? data.results.slice(0, 9) : data.results;
+      const container = document.querySelector(containerSelector);
         
-        topData.forEach((data, index) => {
-          const card = isTopData ? createCard(data, index + 1) : createCard(data);
-          container.appendChild(card);
+      topData.forEach((data, index) => {
+        const card = isTopData ? createCard(data, index + 1) : createCard(data);
+        container.appendChild(card);
       });
-      console.log(topData)
+    } catch (error) {
+        console.error("데이터를 가져오는 중 오류 발생:", error);
+    }
+  }
+
+  async function fetchDataBanner(apiUrl, containerSelector) {
+    try {
+      const response = await fetch(apiUrl, options);
+      const data = await response.json();
+        
+      const bannerData = data.results.slice(0, 1);
+      const container = document.querySelector(containerSelector);
+        
+      bannerData.forEach((data) => {
+        const card = createBanner(data);
+        container.appendChild(card);
+      });
     } catch (error) {
         console.error("데이터를 가져오는 중 오류 발생:", error);
     }
@@ -29,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function(){
   fetchData(movieApiUrl, ".movie-wrapper", false); // 영화 랭킹
   fetchData(tvApiUrl, ".tv-wrapper", false); // TV 랭킹
   fetchData(allApiUrl, ".all-wrapper", true); // 인기작 TOP 10
+  fetchDataBanner(comingApiUrl, ".coming_movie"); // 인기작 TOP 10
 
   // 카드 HTML
   function createCard(data, ranking) {
@@ -44,6 +59,21 @@ document.addEventListener("DOMContentLoaded", function(){
           <p class="title">${data.title ? data.title : data.name}</p>
           ${ranking ? '' : `<p class="desc">${data.overview}</p>`}
           <p class="rating">평점 ${data.vote_average.toFixed(1)}</p>
+        </div>
+      </a>`;
+  
+    card.innerHTML = cardContent;
+  
+    return card;
+  }
+
+  function createBanner(data) {
+    const card = document.createElement("div");
+    card.classList.add("banner");
+
+    const cardContent = `<a href="./detail.html?id=${data.id}&type=movie" class="banner_wrap">
+        <div class="img">
+          <img src="./images/home_banner.jpg" alt="${data.title ? data.title : data.name}">
         </div>
       </a>`;
   
