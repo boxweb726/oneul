@@ -51,7 +51,6 @@
       </form>
     </div>
 
-
   </section>
   <footer class="footer-wrap">
     <div class="navigator">
@@ -101,8 +100,6 @@
         firebase.auth().signInWithEmailAndPassword(userMail, userPassword).then((result)=>{
             console.log(result.user)
             window.location.href = "/list.html"
-        }).catch((error) => {
-          alert('회원정보가 올바르지 않습니다.')
         })
       }
     })
