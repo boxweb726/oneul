@@ -1,20 +1,23 @@
+ul {margin: 0; padding: 0;}
 #contents section {margin-bottom: 40px;}
 .main-text .link {display: block;margin-bottom: 12px;padding: 0 10px 0 16px; margin: 0;}
 .main-text .title {font-size: 20px;line-height: 24px;color: #fff; margin:15px 0}
-.card-wrap {display: block;}
-.card-wrap .img {display: inline-block;position: relative;margin-bottom: 14px;}
-.card-wrap .img img {border-radius: 6px;}
-.card-wrap .title-wrap .title {margin-bottom: 12px; font-size: 18px; line-height: 20px; color: #efefef; font-weight: 600; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: -2px;}
-.card-wrap .title2 { font-size: 18px; line-height: 20px; color: #efefef; font-weight: 600; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: -2px; margin-bottom: 10px }
-.card-wrap .title-wrap .rating {color:#9ba2b7; margin: 5px 0 0 0}
-.card-wrap .desc {margin-bottom: 8px;font-size: 14px;font-weight: 100;line-height: 21px;color: #d4d9e1;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;word-break: break-all;color:#9ba2b7}
-.card-wrap .average {font-size: 15px;line-height: 21px;color: #d4d9e1;}
-.card-wrap .ranking {margin-right: 18px; font-size: 25px; line-height: 20px; color: #efefef; font-style: italic; font-weight: 800}
-.ranking_all .card-wrap {display: flex;align-items: center;height: 100%;}
+.card_wrap {display: block;}
+.card_wrap .img {display: inline-block;position: relative;margin-bottom: 14px;}
+.card_wrap .img img {border-radius: 6px;}
+.card_wrap .title_wrap .title {margin-bottom: 12px; font-size: 18px; line-height: 20px; color: #efefef; font-weight: 600; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: -2px;}
+.card_wrap .title2 { font-size: 18px; line-height: 20px; color: #efefef; font-weight: 600; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: -2px; margin-bottom: 10px }
+.card_wrap .title_wrap .rating {color:#9ba2b7; margin: 5px 0 0 0}
+.card_wrap .desc {margin-bottom: 8px;font-size: 14px;font-weight: 100;line-height: 21px;color: #d4d9e1;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;word-break: break-all;color:#9ba2b7}
+.card_wrap .average {font-size: 15px;line-height: 21px;color: #d4d9e1;}
+.card_wrap .ranking {margin-right: 18px; font-size: 25px; line-height: 20px; color: #efefef; font-style: italic; font-weight: 800}
+.ranking_all .card_wrap {display: flex;align-items: center;height: 100%;}
 .ranking_all .swiper {height: 300px;}
-.ranking_all .swiper .swiper-slide {height: 150px;}
-.ranking_all .card-wrap .img {min-width: 70px; width: 70px;height: 100%;margin-right: 12px;margin-bottom: 0;overflow: hidden;}
-.ranking_all .card-wrap .img img {height: 100%;}
-.ranking_all .card-wrap .title {margin-bottom: 0;}
+.ranking_all .card_wrap .img {min-width: 70px; width: 70px;height: 100%;margin-right: 12px;margin-bottom: 0;overflow: hidden;}
+.ranking_all .card_wrap .img img {height: 100%;}
+.ranking_all .title_wrap {width: 100%;}
+.ranking_all .card_wrap .title {margin-bottom: 0;}
 .all-wrapper { padding: 0 16px }
 .movie-wrapper, .tv-wrapper { padding: 0 16px 0 16px; margin: 0 }
+.banner {position: relative;}
+.banner .title_wrap{position: absolute; top: 0;}

@@ -51,7 +51,6 @@
       </form>
     </div>
 
-
   </section>
   <footer class="footer-wrap">
     <div class="navigator">
@@ -70,8 +69,8 @@
     const storage = firebase.storage();
 
     if(localStorage.getItem('user') != null){ 
-      var 뺀거 = localStorage.getItem('user')
-      $('#username').html(JSON.parse(뺀거).displayName)
+      var tempUserInfo = localStorage.getItem('user')
+      $('#username').html(JSON.parse(tempUserInfo).displayName)
     }
 
     firebase.auth().onAuthStateChanged((user)=>{

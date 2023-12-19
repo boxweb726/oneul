@@ -49,10 +49,12 @@
     </div>
 
     <div class="post-write">
-      <input type="email" placeholder="이메일" id="email-new" class="oneul-form">
-      <input type="password" placeholder="패스워드(6자 이상 입력)" id="pw-new" class="oneul-form">  
-      <input type="text" placeholder="이름" id="name-new" class="oneul-form">
-      <button type="submit" class="oneul-btn" id="register">가입하기</button>    
+      <form id="form">
+        <input type="email" placeholder="이메일" id="email-new" class="oneul-form" required>
+        <input type="password" placeholder="패스워드(6자 이상 입력)" id="pw-new" class="oneul-form" required>  
+        <input type="text" placeholder="이름" id="name-new" class="oneul-form" required>
+        <button type="submit" class="oneul-btn" id="register">가입하기</button> 
+      </form>   
     </div>
 
 
@@ -70,32 +72,27 @@
 
 
   <script>
-    // db 랑 통신하는 문법 연결
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-
-
-
-    // 회원가입
-    $('#register').click(function(){
-      var userMail = $('#email-new').val();
-      var userPassword = $('#pw-new').val();
-      var userName = $('#name-new').val();
-
-      firebase.auth().createUserWithEmailAndPassword(userMail, userPassword).then((result)=>{
-          console.log(result);
-          console.log(result.user);
-          result.user.updateProfile( {displayName : userName} ).then(()=>{
-            window.location.href = "/list.html"
-          })
-      }).catch()
-
+    $('#register').click(function(e){
+      const form = document.querySelector("#form");
+      let state = form.checkValidity();
+      if(!!state) {
+        e.preventDefault();
+        var userMail = $('#email-new').val();
+        var userPassword = $('#pw-new').val();
+        var userName = $('#name-new').val();
+        firebase.auth().createUserWithEmailAndPassword(userMail, userPassword).then((result)=>{
+            console.log(result);
+            console.log(result.user);
+            result.user.updateProfile( {displayName : userName} ).then(()=>{
+              window.location.href = "/list.html"
+            })
+        }).catch()
+      }
     })
 
-
-
-    
   </script>
   
 </body>
