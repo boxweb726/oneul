@@ -7,12 +7,9 @@
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/search.css" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
-
     <!-- favicon -->
     <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
-
     <!-- OG  -->
     <meta property="og:title" content="오늘뭐볼까?"> 
     <meta property="og:url" content="https://oneul-9b3e4.web.app/">
@@ -21,14 +18,18 @@
     <meta property="og:description" content="영화리뷰 플랫폼 오늘뭐볼까?">
 </head>
 <body>
+    <!-- header -->
     <header class="header-wrap">
       <a href="/"><img src="/images/logo.svg"></a>
     </header>
+    <!--//header-->
+
+    <!-- main -->
     <main id="wrap">
         <section class="sec_search sec">
             <div class="inner">
                 <fieldset class="search_box">
-                    <input type="text" id="search_input" oninput="searchJS.searchTypingEvt(value);" onkeydown="searchJS.searchEvt(value)" autocomplete="off" placeholder="작품명을 입력하세요.">
+                    <input type="text" id="search_input" autocomplete="off" placeholder="작품명을 입력하세요.">
                     <button  type="button" class="btn_reset">
                         <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5.234-3.766a.797.797 0 00-.618-.232.907.907 0 00-.7.264L12 10.714 9.552 8.266a.907.907 0 00-.7-.264.797.797 0 00-.85.85.907.907 0 00.264.7L10.714 12l-2.448 2.448a.907.907 0 00-.264.7.797.797 0 00.85.85.907.907 0 00.7-.264L12 13.286l2.448 2.448c.192.192.448.28.7.264a.797.797 0 00.85-.85.907.907 0 00-.264-.7L13.286 12l2.448-2.448a.907.907 0 00.264-.7.797.797 0 00-.232-.618z" fill="#98A4B7"></path>
@@ -70,6 +71,9 @@
             </div>
         </section>
     </main>
+    <!-- //main -->
+
+    <!-- footer -->
     <footer class="footer-wrap">
         <div class="navigator">
           <a href="/index.html" class="nav-item home"><span class="nav-txt">홈</span></a>
@@ -78,201 +82,9 @@
           <a href="/mypage.html" class="nav-item my-page"><span class="nav-txt">MY</span></a>
         </div>
     </footer>
+    <!-- //footer -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-    <script>
-
-        /*   env   */ 
-        const USER = {
-            APIKEY : "api_key=4440ab34848ee6aa6bd8890d39ed2b25",
-            LANGUAGE : "language=ko",
-            BASEURL : "https://api.themoviedb.org/3",
-            Authorization : `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDQwYWIzNDg0OGVlNmFhNmJkODg5MGQzOWVkMmIyNSIsInN1YiI6IjY1NTk3OTUzYjU0MDAyMTRkODJkNTBhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ux96P5Zr2-PMRUrvFbvlmceFWnZnAXQZs2ceylVCNDs`
-        }
-
-        /*   class Tmdb   */ 
-        class Tmdb{
-            constructor(data, category){
-                this.videoList = data;
-            }
-            searchRender(data, category){
-                const searchIntroTitle = document.querySelector(".search_intro .title");
-                const searchListWrap = document.querySelector(".search_list_wrap");
-                const movieSwiper = document.querySelector(`[data-category=movie]`)
-                const tvSwiper = document.querySelector(`[data-category=tv]`);
-                const movieSwiperWrap = movieSwiper.querySelector(`.swiper-wrapper`)
-                const tvSwiperWrap = tvSwiper.querySelector(`.swiper-wrapper`);
-
-                let filterData = data.results.filter((item) => item.poster_path != null)
-
-                // 인기순 sort
-                filterData = filterData.sort(function(a, b){
-                    let dataA = a.popularity;
-                    let dataB = b.popularity;
-
-                    if(dataA > dataB) return -1;
-                    if(dataA === dataB) return 0;
-                    if(dataA < dataB) return 1;
-                })
-
-                if(filterData.length >= 1){
-                    searchListWrap.style.display = "block";
-                    searchIntroTitle.style.display = "none";
-                    movieSwiperWrap.innerHTML = "";
-                    tvSwiperWrap.innerHTML = "";
-
-                    filterData.forEach(item => {
-                        let html = `
-                            <li class="swiper-slide item" data-id="${item.id}" data-genre-id=${item.genre_ids} data-type=${item.media_type}>
-                                <a href="/detail.html?id=${item.id}&type=${item.media_type}" name="${item.media_type == "movie" ? item.title : item.name}" class="btn_link" title="${item.media_type == "movie" ? item.title : item.name} 상세 페이지로 이동">
-                                    <div class="img_box">
-                                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${item.poster_path}" alt="${item.media_type == "movie" ? item.title : item.name} 포스터">
-                                    </div>
-                                    <div class="text_box">
-                                        <p class="title">${item.media_type == "movie" ? item.title : item.name} </p>
-                                        <p class="date">${item.media_type == "movie" ? item.release_date : item.first_air_date}</p>
-                                    </div>
-                                <a>
-                            </li>
-                        `;
-                        
-                        let curSwiper = item.media_type == "movie" ? movieSwiperWrap : tvSwiperWrap;
-                        curSwiper.insertAdjacentHTML("beforeend", html);
-                    });
-
-                    searchJS.searchSwiper.forEach((item, idx)=> {
-                        searchJS.searchSwiper[idx].update();
-                        movieSwiperWrap.childNodes.length != 0 ? movieSwiper.style.display = 'block' : movieSwiper.style.display = 'none';
-                        tvSwiperWrap.childNodes.length != 0 ? tvSwiper.style.display = 'block' : tvSwiper.style.display = 'none';
-                    });
-
-                    searchJS.setWordEvt();
-                }else{
-                    searchListWrap.style.display = "none";
-                    searchIntroTitle.style.display = "block";
-                    searchIntroTitle.innerHTML = "검색결과가 없습니다."
-                }
-                
-            }
-        }
-
-        /*   API   */ 
-        const TMDB = new Tmdb();
-        const callAPI = {
-            options : {
-                method: 'GET',
-                headers: {
-                    accept: 'application/json',
-                    Authorization: USER.Authorization
-                }
-            },
-            searchApi : function(value){
-                fetch(`${USER.BASEURL}/search/multi?query=${value}&adult=false&${USER.LANGUAGE}&page=1`,callAPI.options)
-                .then(data => data.json())
-                .then(data => {
-                    TMDB.searchRender(data);
-                })
-                .catch(err => console.error(err));
-            },
-        }
-
-        /*   JS   */ 
-        const searchJS = {
-            searchSwiper : "",
-            swiperEvt : function(){
-                searchJS.searchSwiper = new Swiper(".swiper-container.searchSwiper", {
-                    slidesPerView: "auto",
-                });
-            },
-            searchEvt : function(value){
-                const btnReset = document.querySelector(".btn_reset");
-                const searchIntroTitle = document.querySelector(".search_intro .title");
-
-                if(event.keyCode === 13) {
-                    if(value != undefined && value != "") callAPI.searchApi(value);
-                }
-            },
-            searchTypingEvt : function(value){
-                const btnReset = document.querySelector(".btn_reset");
-
-                if(value?.length >= 1){
-                    btnReset.style.display = "block";
-                }else{
-                    btnReset.style.display = "none";
-                }  
-            },
-            searchResetEvt : function(){
-                const saerchInput = document.querySelector("#search_input");
-                const btnReset = document.querySelector(".btn_reset");
-                const searchIntroTitle = document.querySelector(".search_intro .title");
-                const searchListWrap = document.querySelector(".search_list_wrap");
-
-                btnReset?.addEventListener("click", () => {
-                    saerchInput.value = "";
-                    btnReset.style.display = "none";
-                    searchListWrap.style.display = "none";
-                    searchIntroTitle.style.display = "block";
-                    searchIntroTitle.innerHTML = "어떤 작품을 찾으세요?";
-                })
-            },
-            setWordEvt : function(){
-                const btnLink = document.querySelectorAll('.btn_link');
-                let storage = window.localStorage.getItem("movie");
-                storage = storage != null ? JSON.parse(storage) : [];
-
-                btnLink.forEach((el, idx) => {
-                    btnLink[idx].addEventListener('click', function(e){
-                        storage.unshift(this.getAttribute('name'));
-                        let nameArr = [...new Set(storage)];
-                        nameArr = JSON.stringify(nameArr);
-                        window.localStorage.setItem("movie", nameArr);
-                    });
-                });
-            },
-            getWordEvt : function(){
-                const wordWarp = document.querySelector(".search_word");
-                const wordList = document.querySelector(".word_list");
-
-                let storage = window.localStorage.getItem("movie");
-                storage = JSON.parse(storage);
-                let nameArr = [...new Set(storage)];
-
-                nameArr.forEach((el, idx) => {
-                    let html = `
-                        <li class="word">
-                            <span>${el}</span>
-                            <button class="btn_delete" data-name="${el}" title="${el} 삭제하기"></button>
-                        </li>
-                    `;
-                    wordList.insertAdjacentHTML("beforeend", html);
-                });
-
-                const btnDelete = document.querySelectorAll('.btn_delete');
-
-                btnDelete.forEach((el, idx) => {
-                    btnDelete[idx].addEventListener('click', function(){
-                        let curName = this.getAttribute('data-name');
-                        this.parentNode.style.display = "none"; 
-
-                        nameArr = nameArr.filter((el) => el != curName);
-                        let arrString = JSON.stringify(nameArr);
-                        window.localStorage.setItem("movie", arrString);
-
-                        if(nameArr == "") wordWarp.style.display = 'none';
-                    });
-                });
-
-                if(btnDelete.length == 0) wordWarp.style.display = 'none';
-            },
-            init : function(){
-                this.swiperEvt();
-                this.searchResetEvt();
-                this.getWordEvt();
-            }
-        }
-        searchJS.init();
-        
-       
-    </script>
+    <script type="module" src="./js/search.js"></script>
 </body>
 </html>
