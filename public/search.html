@@ -1,64 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="documentTitle">검색페이지</title>
+    <title id="documentTitle">오늘뭐볼까? - 검색페이지</title>
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/search.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
+
+    <!-- favicon -->
     <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
 
-    <style>
-        /* root css */
-        :root{
-            --color-white : #efefef; 
-            --color-gray : ##98a4b7; 
-            --color-darkgray : #586a85; 
-            --color-darkblue : #101322;
-        }
-
-        /* icon css */
-        .icon{display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100% 100%; object-fit: contain; }
-        .icon_delete{width: 16px; height: 16px; background-image: url(https://static.kinolights.com/icon/ic-close-navy05.svg);}
-
-        /* common css */
-        *{box-sizing: border-box; text-decoration: none;}
-        body{background-color: var(--color-darkblue); color: var(--color-white);}
-        main{padding: 56px 0;}
-        img{display: block; width: 100%;}
-        fieldset{border:none;}
-        .inner{max-width: 700px; margin: 0 auto;}
-        .sec .title{margin-bottom: 20px; font-size: 18px; color: var(--color-white); font-weight: 700;}
-
-        /* search box*/
-        .sec_search{margin-bottom: 50px;}
-        .sec_search .search_box{position: relative; margin-bottom: 30px; padding: 10px 0;}
-        .sec_search #search_input{ width: 100%; height: 48px; padding-left: 41px; background: url(https://static.kinolights.com/icon/search_navy08.svg) 10px no-repeat #25304a; border: none; border-radius: 8px; color: var(--color-white);}
-        .sec_search .btn_reset{display: none; position: absolute; top: 50%; transform: translateY(-50%); right: 10px; cursor: pointer;}
-
-        .sec_search .word_list{display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
-        .sec_search .word{display: inline-flex; justify-content: center; align-items: center; padding: 3px 10px; border-radius: 50px; font-size: 12px; color: #fff; background-color: #25304a; text-transform: uppercase;}
-        .sec_search .word span{line-height: 1.4em;}
-        .sec_search .btn_delete{display: inline-block; width: 16px; height: 16px; cursor: pointer;}
-
-        /* search result */
-        .sec_result{margin-bottom: 70px;}
-        .sec_result .search_list_wrap{display: none;}
-        .sec_result .searchSwiper{margin-bottom: 50px;}
-        .sec_result .search_list_wrap .item{width: 200px; margin-right: 20px;}
-        .sec_result .search_list_wrap .item .img_box{margin-bottom: 10px; border-radius: 8px; overflow: hidden;}
-        .sec_result .search_list_wrap .item .title{display: -webkit-box; display: -ms-flexbox; margin-bottom: 5px; min-height:38px; overflow:hidden; vertical-align:top; text-overflow: ellipsis; word-break:break-all; -webkit-box-orient:vertical; -webkit-line-clamp:2; font-size: 14px; line-height: 1.3em; color: var(--color-white); font-weight: 700; }
-        .sec_result .search_list_wrap .item .date{ font-size:12px; font-weight: 500; color: var(--color-white);}
-        .sec_result .search_list_wrap .btn_link{display: block;}
-
-
-    </style>
+    <!-- OG  -->
+    <meta property="og:title" content="오늘뭐볼까?"> 
+    <meta property="og:url" content="https://oneul-9b3e4.web.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/images/ogimg.png"> 
+    <meta property="og:description" content="영화리뷰 플랫폼 오늘뭐볼까?">
 </head>
 <body>
     <header class="header-wrap">
-      <a href="/index.html"><img src="/images/logo.svg"></a>
+      <a href="/"><img src="/images/logo.svg"></a>
     </header>
     <main id="wrap">
         <section class="sec_search sec">
@@ -109,7 +73,7 @@
     <footer class="footer-wrap">
         <div class="navigator">
           <a href="/index.html" class="nav-item home"><span class="nav-txt">홈</span></a>
-          <a href="/search.html" class="nav-item search"><span class="nav-txt">검색</span></a>
+          <a href="/search.html" class="nav-item search active"><span class="nav-txt">검색</span></a>
           <a href="/list.html" class="nav-item community"><span class="nav-txt">커뮤니티</span></a>
           <a href="/mypage.html" class="nav-item my-page"><span class="nav-txt">MY</span></a>
         </div>
@@ -119,7 +83,7 @@
     <script>
 
         /*   env   */ 
-        const user = {
+        const USER = {
             APIKEY : "api_key=4440ab34848ee6aa6bd8890d39ed2b25",
             LANGUAGE : "language=ko",
             BASEURL : "https://api.themoviedb.org/3",
@@ -134,7 +98,6 @@
             searchRender(data, category){
                 const searchIntroTitle = document.querySelector(".search_intro .title");
                 const searchListWrap = document.querySelector(".search_list_wrap");
-
                 const movieSwiper = document.querySelector(`[data-category=movie]`)
                 const tvSwiper = document.querySelector(`[data-category=tv]`);
                 const movieSwiperWrap = movieSwiper.querySelector(`.swiper-wrapper`)
@@ -183,7 +146,6 @@
                         tvSwiperWrap.childNodes.length != 0 ? tvSwiper.style.display = 'block' : tvSwiper.style.display = 'none';
                     });
 
-
                     searchJS.setWordEvt();
                 }else{
                     searchListWrap.style.display = "none";
@@ -201,11 +163,11 @@
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: user.Authorization
+                    Authorization: USER.Authorization
                 }
             },
             searchApi : function(value){
-                fetch(`${user.BASEURL}/search/multi?query=${value}&adult=false&${user.LANGUAGE}&page=1`,callAPI.options)
+                fetch(`${USER.BASEURL}/search/multi?query=${value}&adult=false&${USER.LANGUAGE}&page=1`,callAPI.options)
                 .then(data => data.json())
                 .then(data => {
                     TMDB.searchRender(data);
@@ -240,13 +202,13 @@
                 }  
             },
             searchResetEvt : function(){
-                const saerchInout = document.querySelector("#search_input");
+                const saerchInput = document.querySelector("#search_input");
                 const btnReset = document.querySelector(".btn_reset");
                 const searchIntroTitle = document.querySelector(".search_intro .title");
                 const searchListWrap = document.querySelector(".search_list_wrap");
 
-                btnReset.addEventListener("click", () => {
-                    saerchInout.value = "";
+                btnReset?.addEventListener("click", () => {
+                    saerchInput.value = "";
                     btnReset.style.display = "none";
                     searchListWrap.style.display = "none";
                     searchIntroTitle.style.display = "block";
@@ -279,7 +241,7 @@
                     let html = `
                         <li class="word">
                             <span>${el}</span>
-                            <button class="btn_delete" data-name="${el}" title="${el} 삭제하기"><i class="icon icon_delete"></i></button>
+                            <button class="btn_delete" data-name="${el}" title="${el} 삭제하기"></button>
                         </li>
                     `;
                     wordList.insertAdjacentHTML("beforeend", html);
@@ -304,7 +266,7 @@
             },
             init : function(){
                 this.swiperEvt();
-                // this.searchResetEvt();
+                this.searchResetEvt();
                 this.getWordEvt();
             }
         }

@@ -1,4 +1,18 @@
 @import "reset.css";
+
+/* root css */
+:root{
+  --color-white : #efefef; 
+  --color-gray : #98a4b7; 
+  --color-darkgray : #222934; 
+  --color-darkblue : #101322;
+}
+
+/* icon css*/
+.icon{display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100% 100%; object-fit: contain;}
+.icon_search{width: 40px; height: 40px; background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNC41NDg2IDYuMDAwMTJDOS44MjczNSA2LjAwMDEyIDYgOS44Mjc0NyA2IDE0LjU0ODdDNiAxOS4yNyA5LjgyNzM1IDIzLjA5NzQgMTQuNTQ4NiAyMy4wOTc0QzE2LjQ0MjggMjMuMDk3NCAxOC4xOTM5IDIyLjQ4MDkgMTkuNjExIDIxLjQzNzlMMjMuNzk0OSAyNS42MjE4QzI0LjI5OTMgMjYuMTI2MiAyNS4xMTcyIDI2LjEyNjIgMjUuNjIxNyAyNS42MjE4QzI2LjEyNjEgMjUuMTE3MyAyNi4xMjYxIDI0LjI5OTUgMjUuNjIxNyAyMy43OTVMMjEuNDM3OCAxOS42MTExQzIyLjQ4MDggMTguMTk0IDIzLjA5NzIgMTYuNDQyOSAyMy4wOTcyIDE0LjU0ODdDMjMuMDk3MiA5LjgyNzQ3IDE5LjI2OTkgNi4wMDAxMiAxNC41NDg2IDYuMDAwMTJaTTguNTgzNDYgMTQuNTQ4N0M4LjU4MzQ2IDExLjI1NDMgMTEuMjU0MiA4LjU4MzU4IDE0LjU0ODYgOC41ODM1OEMxNy44NDMxIDguNTgzNTggMjAuNTEzOCAxMS4yNTQzIDIwLjUxMzggMTQuNTQ4N0MyMC41MTM4IDE2LjE2MDcgMTkuODc0OSAxNy42MjI2IDE4LjgzNTggMTguNjk2NUMxOC44MTEgMTguNzE3OCAxOC43ODY4IDE4Ljc0MDEgMTguNzYzNCAxOC43NjM2QzE4Ljc0IDE4Ljc4NyAxOC43MTc3IDE4LjgxMTEgMTguNjk2NCAxOC44MzU5QzE3LjYyMjUgMTkuODc1MSAxNi4xNjA2IDIwLjUxMzkgMTQuNTQ4NiAyMC41MTM5QzExLjI1NDIgMjAuNTEzOSA4LjU4MzQ2IDE3Ljg0MzIgOC41ODM0NiAxNC41NDg3WiIgZmlsbD0iI2VmZWZlZiIvPgo8L3N2Zz4K);}
+.icon_delete{width: 16px; height: 16px; background-image: url(https://static.kinolights.com/icon/ic-close-navy05.svg);}
+
 html {
   font-family: -apple-system, sans-serif, Dotum, NotoSansKR, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 16px;
@@ -36,17 +50,22 @@ img {position: relative; width: 100%;}
 
 
 .header-wrap {
-  position:sticky;
-  z-index: 10;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  left:0;
-  top:0;
-  background: #101322;
+  top: 0;
+  max-width: 700px;
   height: 56px;
   padding: 0 16px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+  z-index: 10;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  background-color: rgba(0,0,0,.2);
 }
 
 .content {
@@ -60,6 +79,7 @@ img {position: relative; width: 100%;}
   bottom: 0;
   background: #101322;
   left: 0;
+  z-index: 10;
 }
 
 .navigator {

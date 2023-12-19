@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="css/style.css" rel="stylesheet">
+  <title>오늘뭐볼까? - 커뮤니티</title>
+  <link href="./css/style.css" rel="stylesheet">
+  <link href="./css/common.css" rel="stylesheet">
+  <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
 </head>
 <body>
   <main id="contents">
@@ -14,6 +16,9 @@
       <a href="javascript:;" onClick="postUpload()" class="upload-btn btn">글쓰기</a>
     </header>
     <section class="content">
+      <a href="javascript:;" class="ad-ban" onClick="alert('광고문의 : 인피니티(단가비쌈)')">
+        <img src="./images/ban.svg" style="width:100%;">
+      </a>
       <ul class="post-list"></ul>
     </section>
     <footer class="footer-wrap">
@@ -51,7 +56,7 @@
   <script>
     const db = firebase.firestore();
  
-    db.collection('post').get().then((result)=>{
+    db.collection('post').orderBy('날짜','desc').get().then((result)=>{
         result.forEach((doc)=>{
             var 템플릿 = `<li class="post-list-item">
               <article class="post-wrap">
