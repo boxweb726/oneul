@@ -4,7 +4,7 @@
 .mypage {display:flex; flex-direction:column; justify-content:space-between; gap:50px; padding: 60px 0;}
 .mypage .mypage_info {flex-grow:1; padding:0 20px;  margin-top:20px;}
 .mypage .profile_area {display: flex; flex-direction:column; justify-content: center; align-items: center; gap: 15px; margin: 10px 0 50px;}
-.mypage .profile_area .user_img {display: flex; justify-content: center; align-items: center; width: 104px; height: 104px; font-size: 40px; font-weight:700; border-radius: 50%; background-color: #98a4b7;}
+.mypage .profile_area .user_img {display: flex; justify-content: center; align-items: center; width: 104px; height: 104px; font-size: 40px; font-weight:700; border-radius: 50%; background-color: #98a4b7; overflow:hidden;}
 .mypage .profile_area .user_name {display: flex; justify-content: center; align-items: center;}
 .mypage .profile_area .user_name__link {display: inline-flex; align-items: center; gap: 5px; font-size: 26px; font-weight: 700; line-height: 30px;}
 .mypage .profile_area .user_name__link:after {content: ""; display: inline-flex; width: 9px; height: 9px; border-top: 2px solid #98a4b7; border-right: 2px solid #98a4b7; transform: rotate(45deg);}
@@ -13,7 +13,7 @@
 .mypage .list_area .list_title::before {content: ' \2713'; margin-right: 15px; font-size: 24px; font-weight: 700; line-height: 45px; color: #98a4b7;}
 .mypage .list_area .list_box {margin-bottom: 30px;}
 .mypage .list_area .list_box .list_item {display: flex; justify-content: space-between; gap: 25px; padding: 10px 8px; border-bottom: 1px solid #aec3e480;}
-.mypage .list_area .list_box .list_item .list_subject {flex:1; font-size: 20px; font-weight:700; color:#fff; line-height: 24px;}
+.mypage .list_area .list_box .list_item .list_subject {flex:1; font-size: 18px; color:#fff; line-height: 24px;}
 .mypage .list_area .list_box .list_item .list_date {align-self: flex-end; font-size: 14px; color:#ffffff80; line-height: 24px;}
 
 .mypage .list_area .interest_box {width: 100%;}
