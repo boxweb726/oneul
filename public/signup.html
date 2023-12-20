@@ -87,6 +87,7 @@
             console.log(result);
             console.log(result.user);
             result.user.updateProfile( {displayName : userName} ).then(()=>{
+              localStorage.setItem('user', JSON.stringify(result.user))
               window.location.href = "/list.html"
             })
         }).catch()
