@@ -41,20 +41,14 @@
 
   <main id="contents" class="mypage">
     <div class="mypage_info">
-      <section class="profile_area">
-        <div class="user_img">
-              
-        </div>
-        <div class="user_name"><a href="/mypage_update.html" title="나의 프로필로 이동" class="user_name__link"><span id="username"></span></a></div>
-      </section>
-  
-      <section class="list_area">
-          <h3 class="list_title">내가 쓴 글</h3>
-          <ul class="list_box"></ul>
-      </section>
+        <p class="info_text">정말 탈퇴하실건가요?</p>
+
     </div>
     
-    <a href="javascript:;" title="로그아웃" onClick="logout()" class="oneul-btn">로그아웃</a>
+    <div class="btn_area">
+        <a href="/mypage.html" class="oneul-btn">취소</a>
+        <a href="javascript:;" title="탈퇴하기" onClick="userDel()" class="oneul-btn">로그아웃</a>
+    </div>
   
   </main>
     
@@ -69,39 +63,17 @@
 
 
   <script>
-    const db = firebase.firestore();
-    const storage = firebase.storage();
-    const postRef = db.collection('post');
-
-    firebase.auth().onAuthStateChanged((user)=>{
-      if (!user) {
-        location.href='/login.html';
-      } else if(user) {
-        uid = user.uid;
-        uname = user.displayName;
-        uNicname = user.nickname;
-        uPic = user.photoURL;
-        uImg = !uPic ? '<p>'+uname.substring(0,1)+'</p>' : '<img src="'+uPic+'" alt="img">';
-
-        $('#username').text(uname)
-        $('.user_img').html(uImg)
-
-        //내가쓴게시글
-        let query = postRef.where("uid", "==", uid).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc, i) => {
-              $('.list_box').append('<li><a href="/view.html?id='+doc.id+'" title="'+doc.data().제목+' 보기" class="list_item"><p class="list_subject">'+doc.data(i).제목+'</p><span class="list_date">'+doc.data().날짜.toDate().toLocaleDateString()+'</span></a></li>');
+    //탈퇴하기
+    
+    const user = firebase.auth().currentUser;
+    function userDel() {
+        firebase.auth().onAuthStateChanged((user)=>{
+            user.delete().then(()=>{
+                location.href='/index.html';
+            }).catch((error)=>{
+    
             });
-        })
-      }
-    })
-
-    function logout() {
-      firebase.auth().signOut().then(function(){
-        localStorage.removeItem('user');
-        location.href='/index.html';
-      }).catch(function(error){
-
-      });
+        });
     }
     
   </script>

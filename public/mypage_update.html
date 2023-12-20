@@ -41,20 +41,31 @@
 
   <main id="contents" class="mypage">
     <div class="mypage_info">
-      <section class="profile_area">
-        <div class="user_img">
-              
+        <div class="profile_update_area">
+            <div class="user_info">
+                <p class="user_info_text"><span class="user_name"></span>님의 회원정보수정</p>
+            </div>
+            
+            <form id="form">
+              <!-- <div class="user_img">
+                <img src="" alt="">
+              </div>
+              <div class="file_box">
+                <label for="input_file">파일선택</label>
+                <input type="file" name="input_file" id="input_file">
+              </div> -->
+              <input type="email" placeholder="이메일" id="email-new" class="oneul-form" readonly>
+              <input type="password" placeholder="패스워드(6자 이상 입력)" id="pw-new" class="oneul-form" required>  
+              <input type="text" placeholder="이름" id="name-new" class="oneul-form" required>
+            </form> 
+          </div>
+          
         </div>
-        <div class="user_name"><a href="/mypage_update.html" title="나의 프로필로 이동" class="user_name__link"><span id="username"></span></a></div>
-      </section>
-  
-      <section class="list_area">
-          <h3 class="list_title">내가 쓴 글</h3>
-          <ul class="list_box"></ul>
-      </section>
+        
+        <div class="btn_area">
+          <!-- <a href="/mypage_delete.html" class="btn_line">탈퇴하기 ></a> -->
+          <button type="submit" class="oneul-btn" id="updateProfile">수정하기</button> 
     </div>
-    
-    <a href="javascript:;" title="로그아웃" onClick="logout()" class="oneul-btn">로그아웃</a>
   
   </main>
     
@@ -69,40 +80,33 @@
 
 
   <script>
-    const db = firebase.firestore();
-    const storage = firebase.storage();
-    const postRef = db.collection('post');
+    const user = firebase.auth().currentUser;
 
     firebase.auth().onAuthStateChanged((user)=>{
-      if (!user) {
-        location.href='/login.html';
-      } else if(user) {
-        uid = user.uid;
-        uname = user.displayName;
-        uNicname = user.nickname;
-        uPic = user.photoURL;
-        uImg = !uPic ? '<p>'+uname.substring(0,1)+'</p>' : '<img src="'+uPic+'" alt="img">';
-
-        $('#username').text(uname)
-        $('.user_img').html(uImg)
-
-        //내가쓴게시글
-        let query = postRef.where("uid", "==", uid).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc, i) => {
-              $('.list_box').append('<li><a href="/view.html?id='+doc.id+'" title="'+doc.data().제목+' 보기" class="list_item"><p class="list_subject">'+doc.data(i).제목+'</p><span class="list_date">'+doc.data().날짜.toDate().toLocaleDateString()+'</span></a></li>');
-            });
-        })
+        if(user) {
+            uname = user.displayName;
+            uemail = user.email;
+            $('.user_name').text(uname);
+            $('#email-new').val(uemail);
+        }
+    });
+    
+    $('#updateProfile').click(function(e){
+      const form = document.querySelector("#form");
+      let state = form.checkValidity();
+      if(!!state) {
+        e.preventDefault();
+        var userPassword = $('#pw-new').val();
+        var userName = $('#name-new').val();
+        firebase.auth().currentUser.updateProfile({
+          displayName: userName,
+          userPassword: userPassword
+        }).then(() => {
+          location.href = "/mypage.html"
+        }).catch((error) => {
+        }); 
       }
     })
-
-    function logout() {
-      firebase.auth().signOut().then(function(){
-        localStorage.removeItem('user');
-        location.href='/index.html';
-      }).catch(function(error){
-
-      });
-    }
     
   </script>
   

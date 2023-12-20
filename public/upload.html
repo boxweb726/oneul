@@ -8,11 +8,8 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/common.css" rel="stylesheet">
   <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
-
 </head>
 <body>
-
- 
 
 <!-- 필수 호출 script -->
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
@@ -37,7 +34,7 @@
 
 <main id="contents">
   <header class="header-wrap">
-    <a href="#"><img src="/images/logo.svg"></a>
+    <a href="/"><img src="/images/logo.svg"></a>
   </header>
   <section class="content h-100">
     <div class="post-write h-100">
@@ -58,8 +55,6 @@
     </div>
   </footer>
 </main>
-
-
 
   <script>
     const db = firebase.firestore();
@@ -102,18 +97,11 @@
                 }).catch((err)=>{
                   console.log(err)
                 })
-
-
-
               });
             }
-        );
-
-        
+        );     
       }
     })
-
-    
   </script>
   
 </body>
