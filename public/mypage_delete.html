@@ -68,7 +68,10 @@
     function userDel() {
         firebase.auth().onAuthStateChanged((user)=>{
             user.delete().then(()=>{
+<<<<<<< HEAD
             alert('기다리고 있을게요😭')
+=======
+>>>>>>> master
                 location.href='/index.html';
             }).catch((error)=>{
     
