@@ -8,11 +8,8 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/common.css" rel="stylesheet">
   <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
-
 </head>
 <body>
-
- 
 
 <!-- 필수 호출 script -->
 <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
@@ -37,7 +34,7 @@
 
 <main id="contents">
   <header class="header-wrap">
-    <a href="#"><img src="/images/logo.svg"></a>
+    <a href="/"><img src="/images/logo.svg"></a>
   </header>
   <section class="content h-100">
     <div class="post-write h-100">
@@ -59,8 +56,6 @@
   </footer>
 </main>
 
-
-
   <script>
     const db = firebase.firestore();
     const storage = firebase.storage();
@@ -76,23 +71,37 @@
         var savePath = storageRef.child('image/' + file.name);
         var upload = savePath.put(file);
 
-        var postData = {
-        제목 : $('#title').val(),
-        내용 : $('#content').val(),
-        날짜 : new Date(),
-        uid : JSON.parse(localStorage.getItem('user')).uid,
-        이름 : JSON.parse(localStorage.getItem('user')).displayName,
-      }
-      db.collection('post').add(postData).then((result)=>{
-        console.log(result);
-        window.location.href = "/list.html"
-      }).catch((err)=>{
-        console.log(err)
-      })
+        upload.on( 'state_changed', 
+            // 변화시 동작하는 함수 
+            null, 
+            //에러시 동작하는 함수
+            (error) => {
+              console.error('실패사유는', error);
+            }, 
+            // 성공시 동작하는 함수
+            () => {
+              upload.snapshot.ref.getDownloadURL().then((url) => {
+                console.log('업로드된 경로는', url);
+
+                var postData = {
+                  제목 : $('#title').val(),
+                  내용 : $('#content').val(),
+                  날짜 : new Date(),
+                  uid : JSON.parse(localStorage.getItem('user')).uid,
+                  이름 : JSON.parse(localStorage.getItem('user')).displayName,
+                  이미지 : url,
+                }
+                db.collection('post').add(postData).then((result)=>{
+                  console.log(result);
+                  window.location.href = "/list.html"
+                }).catch((err)=>{
+                  console.log(err)
+                })
+              });
+            }
+        );     
       }
     })
-
-    
   </script>
   
 </body>

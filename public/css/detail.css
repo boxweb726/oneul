@@ -1,18 +1,13 @@
-@import "common.css";
- 
  /* common css*/
- *{box-sizing: border-box; text-decoration: none;}
- body{background-color: var(--color-darkblue); color: var(--color-white);}
  main{padding: 56px 0;}
  img{display: block; width: 100%;}
  .inner{width: 94%;; max-width: 700px; margin: 0 auto;}
 
- /* sec_info */
+ /* 영화정보 상단 */
  .sec_info .inner{position: relative;}
  .sec_info .nav{display: none;position: absolute; right: 10px; top: 10px; z-index: 3;}
  .sec_info .bg_box .bg{width: 100%; height: 310px; }
  .sec_info .bg_box .gradient{ position: absolute; inset: 0; background: linear-gradient(180deg,rgba(16,19,34,0),rgba(16,19,34,.76) 77.19%,var(--color-darkblue) 93.19%),linear-gradient(90deg,rgba(16,19,34,0) 72.46%,rgba(16,19,34,.76) 90.53%,var(--color-darkblue) 98.12%),linear-gradient(270deg,rgba(16,19,34,0) 72.46%,rgba(16,19,34,.76) 90.53%,var(--color-darkblue) 98.12%)}
- 
  .sec_info .info_box{position: absolute; inset: auto 0 0 0; display: flex; justify-content: space-between; align-items: flex-end;}
  .sec_info .text_box .type{display: inline-flex; justify-content: center; align-items: center; height: 23px; padding: 0 12px; margin-bottom: 6px; font-size: 13px; font-weight: 600; text-transform: uppercase; border: 1px solid var(--color-white); color: var(--color-white);}
  .sec_info .text_box .title{margin-bottom: 3px; font-size: 20px; font-weight: 700; line-height: 28px; color: var(--color-white);}
@@ -21,7 +16,7 @@
  .sec_info .text_box .tag{display: inline-flex; justify-content: center; align-items: center; height: 24px; padding: 0 10px; border-radius: 50px; font-size: 12px; color: #fff; background-color: #25304a; text-transform: uppercase;}
  .sec_info .poster_box{flex-shrink: 0; width: 100px; border-radius: 8px; overflow: hidden;}
 
- /* sec_contents */
+ /* 영화정보 하단 */
  .swiper-wrapper { padding:0;margin:0;}
  .sec_contents .inner{padding: 0;}
 
@@ -50,6 +45,5 @@
  #summary .swiper-container .item .text_box{padding-bottom: 4px;}
  #summary .swiper-container .item .name{margin-bottom: 3px; font-size: 16px; font-weight: 700;}
  #summary .swiper-container .item .character{font-size: 14px; font-weight: 700; color: #9ba2b7}
-
  #summary .swiper-container .item .title{display: -webkit-box; display: -ms-flexbox; margin-bottom: 5px; overflow:hidden; vertical-align:top; text-overflow: ellipsis; word-break:break-all; -webkit-box-orient:vertical; -webkit-line-clamp:2; font-size: 14px; line-height: 1.3em; color: #fff; font-weight: 700; }
  #summary .swiper-container .item .date{ font-size:12px; font-weight: 500; color: #fff;}

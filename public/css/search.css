@@ -1,15 +1,12 @@
 /* common css */
-*{box-sizing: border-box; text-decoration: none;}
-body{background-color: var(--color-darkblue); color: var(--color-white);}
 main{padding: 56px 0;}
 img{display: block; width: 100%;}
-fieldset{border:none;}
 
 .inner{max-width: 700px; margin: 0 auto;}
 .sec { padding: 0 16px }
 .sec .title{margin-bottom: 20px; font-size: 18px; color: var(--color-white); font-weight: 700;}
 
-/* search box */
+/* 검색영역 */
 .sec_search{margin-bottom: 50px;}
 .sec_search .search_box{position: relative; margin-bottom: 30px; padding: 10px 0;}
 .sec_search #search_input{ width: 100%; height: 48px; padding-left: 41px; background: url(https://static.kinolights.com/icon/search_navy08.svg) 10px no-repeat #25304a; border: none; border-radius: 8px; color: var(--color-white);}
@@ -24,7 +21,7 @@ fieldset{border:none;}
     background: url(https://static.kinolights.com/icon/ic-close-navy05.svg) no-repeat center/16px ;
 }
 
-/* search result */
+/* 검색결과 */
 .swiper-wrapper { padding:0; margin:0;}
 .sec_result{margin-bottom: 70px;}
 .sec_result .search_list_wrap{display: none;}

@@ -37,7 +37,7 @@
 
 <main id="contents">
   <header class="header-wrap">
-    <a href="/index.html"><img src="/images/logo.svg"></a>
+    <a href="/"><img src="/images/logo.svg"></a>
   </header>
   <section class="content">
     
@@ -100,15 +100,11 @@
         firebase.auth().signInWithEmailAndPassword(userMail, userPassword).then((result)=>{
             console.log(result.user)
             window.location.href = "/list.html"
+        }).catch((err)=>{
+          alert('회원정보가 옳지 않습니다.')
         })
       }
-    })
-
-      
-
-
-
-    
+    })    
   </script>
   
 </body>
