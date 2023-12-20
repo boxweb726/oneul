@@ -68,7 +68,7 @@
 
         var file = document.querySelector('#image').files[0]; 
         var storageRef = storage.ref();
-        var savePath = storageRef.child('image/' + file.name);
+        var savePath = storageRef.child('image/' + file?.name);
         var upload = savePath.put(file);
 
         upload.on( 'state_changed', 
