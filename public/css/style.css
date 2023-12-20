@@ -208,12 +208,10 @@ img {position: relative; width: 100%;}
 
 .ad-waring {
   color: #7b7b7b;
-  letter-spacing: -1px;
   padding: 0 16px;
   text-align: right;
   display: block;
   margin: 10px 0;
-  letter-spacing: -3px;
 }
 
 .img-wrap img { max-width: 100% }
