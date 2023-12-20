@@ -87,7 +87,7 @@
         //내가쓴게시글
         let query = postRef.where("uid", "==", uid).get().then((querySnapshot) => {
             querySnapshot.forEach((doc, i) => {
-              $('.list_box').append('<li><a href="/view.html?id='+doc.id+'" title="'+doc.data().제목+' 보기" class="list_item"><p class="list_subject">'+doc.data(i).제목+'</p><span class="list_date">'+doc.data().날짜.toDate().toLocaleDateString()+'</span></a></li>');
+              $('.list_box').append('<li class="list_item"><a href="/view.html?id='+doc.id+'" title="'+doc.data().제목+' 보기"><p class="list_subject">'+doc.data().제목+'</p><span class="list_date">'+doc.data().날짜.toDate().toLocaleDateString()+'</span></a></li>');
             });
         })
       }
