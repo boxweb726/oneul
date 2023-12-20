@@ -21,3 +21,4 @@ ul {margin: 0; padding: 0;}
 .movie-wrapper, .tv-wrapper { padding: 0 16px 0 16px; margin: 0 }
 .banner {position: relative;}
 .banner .banner_wrap{display: block;}
+.canvas {pointer-events: none; touch-action: none; position: fixed; left: 0; top: 0; right: 0; bottom: 0; filter: blur(1px); -webkit-filter: blur(1px);}
