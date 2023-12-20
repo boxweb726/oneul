@@ -1,7 +1,7 @@
 ul {margin: 0; padding: 0;}
 #contents section {margin-bottom: 40px;}
 .main-text .link {display: block;margin-bottom: 12px;padding: 0 10px 0 16px; margin: 0;}
-.main-text .title {font-size: 20px;line-height: 24px;color: #fff; margin:15px 0}
+.main-text .title {position: relative; font-size: 20px;line-height: 24px;color: #fff; margin:15px 0}
 .card_wrap {display: block;}
 .card_wrap .img {display: inline-block;position: relative;margin-bottom: 14px;}
 .card_wrap .img img {border-radius: 6px;}
@@ -21,4 +21,3 @@ ul {margin: 0; padding: 0;}
 .movie-wrapper, .tv-wrapper { padding: 0 16px 0 16px; margin: 0 }
 .banner {position: relative;}
 .banner .banner_wrap{display: block;}
-.canvas {pointer-events: none; touch-action: none; position: fixed; left: 0; top: 0; right: 0; bottom: 0; filter: blur(1px); -webkit-filter: blur(1px);}
