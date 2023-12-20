@@ -2,6 +2,7 @@ import USER from './config.js'
 
 /*   TMDB Render   */ 
 const TMDB = {
+    // 검색결과 랜더링
     searchRender : function(data, category){
         const searchIntroTitle = document.querySelector(".search_intro .title");
         const searchListWrap = document.querySelector(".search_list_wrap");
@@ -10,6 +11,7 @@ const TMDB = {
         const movieSwiperWrap = movieSwiper.querySelector(`.swiper-wrapper`)
         const tvSwiperWrap = tvSwiper.querySelector(`.swiper-wrapper`);
 
+        // 이미지가 없을시 예외처리
         let filterData = data.results.filter((item) => item.poster_path != null)
 
         // 인기순 sort
@@ -22,12 +24,15 @@ const TMDB = {
             if(dataA < dataB) return 1;
         })
 
+        // 검색결과 예외처리
         if(filterData.length >= 1){
+            // 결과 있을 시
             searchListWrap.style.display = "block";
             searchIntroTitle.style.display = "none";
             movieSwiperWrap.innerHTML = "";
             tvSwiperWrap.innerHTML = "";
 
+            // 랜더링
             filterData.forEach(item => {
                 let html = `
                     <li class="swiper-slide item" data-id="${item.id}" data-genre-id=${item.genre_ids} data-type=${item.media_type}>
@@ -42,19 +47,23 @@ const TMDB = {
                         <a>
                     </li>
                 `;
-                
+                // type에 따라 카테고리 분류
                 let curSwiper = item.media_type == "movie" ? movieSwiperWrap : tvSwiperWrap;
                 curSwiper.insertAdjacentHTML("beforeend", html);
             });
 
+            // 스와이퍼 업데이트
             searchJS.searchSwiper.forEach((item, idx)=> {
                 searchJS.searchSwiper[idx].update();
+
+                // 카테고리에 검색결과 없을시 예외처리
                 movieSwiperWrap.childNodes.length != 0 ? movieSwiper.style.display = 'block' : movieSwiper.style.display = 'none';
                 tvSwiperWrap.childNodes.length != 0 ? tvSwiper.style.display = 'block' : tvSwiper.style.display = 'none';
             });
 
             searchJS.setWordEvt();
         }else{
+            // 결과 없을 시
             searchListWrap.style.display = "none";
             searchIntroTitle.style.display = "block";
             searchIntroTitle.innerHTML = "검색결과가 없습니다."
@@ -65,6 +74,7 @@ const TMDB = {
 
 /*   API   */ 
 const callAPI = {
+    // 옵션
     options : {
         method: 'GET',
         headers: {
@@ -99,6 +109,7 @@ const searchJS = {
         input.addEventListener("keydown", function(e){
             let value = this.value;
 
+            // 엔터키 조건부 실헹
             if(e.keyCode === 13) {
                 if(value != undefined && value != "") callAPI.searchApi(value);
             }
@@ -108,6 +119,7 @@ const searchJS = {
     searchTypingEvt : function(value){
         const input = document.querySelector("#search_input");
         const btnReset = document.querySelector(".btn_reset");
+        // 타이핑 시 리셋버튼 활성화
         input.addEventListener("input", function(){
             let value = this.value;
 
@@ -124,6 +136,7 @@ const searchJS = {
         const btnReset = document.querySelector(".btn_reset");
         const searchIntroTitle = document.querySelector(".search_intro .title");
         const searchListWrap = document.querySelector(".search_list_wrap");
+
         btnReset?.addEventListener("click", () => {
             saerchInput.value = "";
             btnReset.style.display = "none";
@@ -136,10 +149,13 @@ const searchJS = {
     setWordEvt : function(){
         const btnLink = document.querySelectorAll('.btn_link');
         let storage = window.localStorage.getItem("movie");
+        // 스토리지 빈값일때 예외처리
         storage = storage != null ? JSON.parse(storage) : [];
         btnLink.forEach((el, idx) => {
             btnLink[idx].addEventListener('click', function(e){
+                // 언쉬프트로 최신순으로 데이터 저장
                 storage.unshift(this.getAttribute('name'));
+                // new Set 으로 중복제거 후 객체반환 => 레스트파라미터로 배열처리
                 let nameArr = [...new Set(storage)];
                 nameArr = JSON.stringify(nameArr);
                 window.localStorage.setItem("movie", nameArr);
@@ -155,6 +171,7 @@ const searchJS = {
         storage = JSON.parse(storage);
         let nameArr = [...new Set(storage)];
 
+        // 최근 본 컨텐츠 랜더링
         nameArr.forEach((el, idx) => {
             let html = `
                 <li class="word">
@@ -167,6 +184,7 @@ const searchJS = {
 
         const btnDelete = document.querySelectorAll('.btn_delete');
 
+        // 최근 본 컨텐츠 삭제버튼
         btnDelete.forEach((el, idx) => {
             btnDelete[idx].addEventListener('click', function(){
                 let curName = this.getAttribute('data-name');
