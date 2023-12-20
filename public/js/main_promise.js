@@ -28,31 +28,10 @@ document.addEventListener("DOMContentLoaded", function(){
     }
   }
 
-  // 배너 데이터를 가져와 화면에 표시하는 함수
-  async function fetchDataBanner(apiUrl, containerSelector) {
-    try {
-      const response = await fetch(apiUrl, options);
-      const data = await response.json();
-      
-      // 첫 번째 데이터만 추출
-      const bannerData = data.results.slice(0, 1);
-      const container = document.querySelector(containerSelector);
-        
-      // 배너 카드 생성 후 컨테이너에 추가
-      bannerData.forEach((data) => {
-        const card = createBanner(data);
-        container.appendChild(card);
-      });
-    } catch (error) {
-        console.error("데이터를 가져오는 중 오류 발생:", error);
-    }
-  }
-
   // 각 섹션별 데이터를 가져와서 화면에 표시
   fetchData(allApiUrl, ".all-wrapper", true); // 인기작 TOP 10
   fetchData(movieApiUrl, ".movie-wrapper", false); // 영화 랭킹
   fetchData(tvApiUrl, ".tv-wrapper", false); // TV 랭킹
-  fetchDataBanner(comingApiUrl, ".coming_movie"); // 배너
 
   // 카드 HTML을 생성하는 함수
   function createCard(data, ranking) {
@@ -68,22 +47,6 @@ document.addEventListener("DOMContentLoaded", function(){
           <p class="title">${data.title ? data.title : data.name}</p>
           ${ranking ? '' : `<p class="desc">${data.overview}</p>`}
           <p class="rating">평점 ${data.vote_average.toFixed(1)}</p>
-        </div>
-      </a>`;
-  
-    card.innerHTML = cardContent;
-  
-    return card;
-  }
-
-  // 배너 HTML을 생성하는 함수
-  function createBanner(data) {
-    const card = document.createElement("div");
-    card.classList.add("banner");
-
-    const cardContent = `<a href="./detail.html?id=${data.id}&type=movie" class="banner_wrap">
-        <div class="img">
-          <img src="./images/home_banner.png" alt="${data.title ? data.title : data.name}">
         </div>
       </a>`;
   
