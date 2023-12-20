@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const cardContent = `<a href="./detail.html?id=${data.id}&type=movie" class="banner_wrap">
         <div class="img">
-          <img src="./images/home_banner.jpg" alt="${data.title ? data.title : data.name}">
+          <img src="./images/home_banner.png" alt="${data.title ? data.title : data.name}">
         </div>
       </a>`;
   
