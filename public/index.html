@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/common.css">
   <!-- <script src="./js/main.js"></script> -->
-  <script src="./js/main_promise.js"></script>
+  <script type="module" src="./js/main_promise.js"></script>
+  <script src="./js/snow.js"></script>
 </head>
 <body>
 
@@ -49,6 +50,9 @@
     <a href="/"><img src="/images/logo.svg"></a>
   </header>
   <div class="content">
+    <div class="canvas">
+      <canvas width="1920" height='2000'>
+    </div>
     <section class="ranking_all">
       <div class="main-text">
         <a href="#" class="link">
@@ -60,7 +64,13 @@
       </div>
     </section>
 
-    <section class="coming_movie"></section>
+    <section class="banner">
+      <a href="/login.html" class="banner_wrap">
+        <div class="img">
+          <img src="./images/home_banner.png" alt="${data.title ? data.title : data.name}">
+        </div>
+      </a>
+    </section>
 
     <section class="ranking_movie">
       <div class="main-text">

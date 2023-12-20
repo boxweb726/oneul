@@ -19,7 +19,6 @@ const TMDB = {
         title.innerHTML = type == "movie" ? data.title : data.name;
         date.innerHTML = type == "movie" ? `개봉일 : ${data.release_date}` : `방영일 : ${data.first_air_date} ~ ${data.last_air_date}`;
         bg.style.background = `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.backdrop_path}) no-repeat center / cover`;
-        bg.setAttribute("src", `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${data.backdrop_path}`);
         poster.setAttribute("src", `https://image.tmdb.org/t/p/w220_and_h330_face/${data.poster_path}`);
         poster.setAttribute("alt", `${data.name}`);
         summary.innerHTML = data.overview;
@@ -39,7 +38,7 @@ const TMDB = {
         // 예고편이 메인예고편이 없을때 예외처리
         if(data.results.length >= 1) iframe.setAttribute("src", `https://www.youtube.com/embed/${data.results[0].key}`);
 
-        // 메인예고편
+        // 메인 예고편
         let mainVideo = data.results.forEach((el) => {
             if(el.name.indexOf("메인") != -1){
                 iframe.setAttribute("src", `https://www.youtube.com/embed/${el.key}`);
@@ -77,7 +76,7 @@ const TMDB = {
 
         similar = similar.filter((item) => item.poster_path != null)
 
-        // 개봉일 최신순 sort
+        // 인기순 sort
         similar = similar.sort(function(a, b){
             let dataA = a.popularity;
             let dataB = b.popularity;
@@ -103,6 +102,7 @@ const TMDB = {
                 
                 similarSwiper.insertAdjacentHTML("beforeend", html);
             });
+        //스와이퍼 업데이트 
         detailJS.similarSwiper.update();
         detailJS.setWordEvt();
     }
@@ -110,6 +110,7 @@ const TMDB = {
 
 /*   API   */ 
 const callAPI = {
+    // 옵션
     options : {
         method: 'GET',
         headers: {
@@ -162,12 +163,14 @@ const detailJS = {
     
     // URL 처리
     getParameter: function() {
+        // 정규식 추출
         let idRegexp = /[^0-9]/g;
         let typeRegexp = /.*.type=/g;
 
         let id = location.search.replace(idRegexp, "");
         let type = location.search.replace(typeRegexp, "");
 
+        // API call
         callAPI.infoApi(id, type);
         callAPI.videoApi(id, type);
         callAPI.actorApi(id, type);

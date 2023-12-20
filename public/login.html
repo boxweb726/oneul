@@ -40,8 +40,6 @@
     <a href="/"><img src="/images/logo.svg"></a>
   </header>
   <section class="content">
-    
-
     <div class="post-write">
       <form id="form">
         <input type="email" placeholder="이메일" id="email" class="oneul-form" required>
@@ -50,7 +48,6 @@
         <a href="/signup.html" class="login-txt">아이디가 없다면<br> <b style="color:#fff">회원가입</b> 후 이용해보세요!</a>  
       </form>
     </div>
-
   </section>
   <footer class="footer-wrap">
     <div class="navigator">
@@ -62,17 +59,10 @@
   </footer>
 </main>
 
-
-
   <script>
     const db = firebase.firestore();
-    const storage = firebase.storage();
-
-    if(localStorage.getItem('user') != null){ 
-      var tempUserInfo = localStorage.getItem('user')
-      $('#username').html(JSON.parse(tempUserInfo).displayName)
-    }
-
+    
+    // 로컬스토리지에 유저정보를 json 문자열 형태로 변환하여 저장 
     firebase.auth().onAuthStateChanged((user)=>{
       if (user) {
         console.log(user.uid)
@@ -83,20 +73,20 @@
       }
     })
 
-    // 로그아웃
+    // 로그아웃 : 유저정보를 로컬스트리지에서 삭제
     $('#logout').click(function(){
       firebase.auth().signOut()
       localStorage.removeItem('user')
     })
 
-    // 로그인
+    // firebase 문법이용, 일치하는 정보가 있으면 로그인 후 list 페이지 이동, 없으면 경고 alert 출력
     $('#login').click(function(e){
       const form = document.querySelector("#form");
       let state = form.checkValidity();
       if(!!state){
         e.preventDefault();
-        var userMail = $('#email').val();
-        var userPassword = $('#pw').val();
+        const userMail = $('#email').val();
+        const userPassword = $('#pw').val();
         firebase.auth().signInWithEmailAndPassword(userMail, userPassword).then((result)=>{
             console.log(result.user)
             window.location.href = "/list.html"

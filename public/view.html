@@ -67,8 +67,10 @@
 
     var queryString = new URLSearchParams(window.location.search);
     
+    // URL의 id 파라미터값을 queiryString 으로 추출 후 db조회하여 일치 시 해당 글의 정보를 출력
     db.collection('post').doc(queryString.get('id')).get().then((result)=>{
         console.log(result.data())
+        console.log(queryString.get('id'))
         $('.post-title').html(result.data().제목)
         $('.post-content').html(result.data().내용)
         $('.post-user').html(result.data().이름)
