@@ -56,9 +56,10 @@
   <script>
     const db = firebase.firestore();
  
+    // 파이어베이스 DB에 접근, POST라는 컬렉션에서 날짜내림차순 정렬하여 출력
     db.collection('post').orderBy('날짜','desc').get().then((result)=>{
         result.forEach((doc)=>{
-            var 템플릿 = `<li class="post-list-item">
+            const postList = `<li class="post-list-item">
                             <article class="post-wrap">
                                 <a href="/view.html?id=${doc.id}" class="post-link"> 
                                   <div class="post-item-top">
@@ -71,10 +72,11 @@
                                 </a>
                             </article>
                         </li>`;
-            $('.post-list').append(템플릿)
+            $('.post-list').append(postList);
         })
     })
 
+    // 비회원 글쓰기 제한 함수
     function postUpload() {
       firebase.auth().onAuthStateChanged((user)=>{
         if (user) {
