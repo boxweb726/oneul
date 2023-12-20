@@ -2,39 +2,40 @@
 @import "common.css";
 
 /* 마이페이지 - 메인 */
-.mypage {display:flex; flex-direction:column; justify-content:space-between; gap:50px; padding: 60px 0;}
-.mypage .mypage_info {flex-grow:1; padding:0 20px;  margin-top:20px;}
+.mypage {display:flex; flex-direction:column; justify-content:space-between; gap:50px; padding: 60px 20px;}
+.mypage .mypage_info {flex-grow:1; margin-top:20px;}
 .mypage .profile_area {display: flex; flex-direction:column; justify-content: center; align-items: center; gap: 15px; margin: 10px 0 50px;}
-.mypage .profile_area .user_img {display: flex; justify-content: center; align-items: center; width: 104px; height: 104px; font-size: 40px; font-weight:700; border-radius: 50%; background-color: #98a4b7; overflow:hidden;}
+.mypage .profile_area .user_img {display: flex; justify-content: center; align-items: center; width: 104px; height: 104px; font-size: 40px; font-weight:700; color: var(--color-darkblue); border-radius: 50%; background-color: var(--color-gray); overflow:hidden;}
 .mypage .profile_area .user_name {display: flex; justify-content: center; align-items: center;}
 .mypage .profile_area .user_name__link {display: inline-flex; align-items: center; gap: 5px; font-size: 26px; font-weight: 700; line-height: 30px;}
-.mypage .profile_area .user_name__link:after {content: ""; display: inline-flex; width: 9px; height: 9px; border-top: 2px solid #98a4b7; border-right: 2px solid #98a4b7; transform: rotate(45deg);}
+.mypage .profile_area .user_name__link:after {content: ""; display: inline-flex; width: 9px; height: 9px; border-top: 2px solid var(--color-gray); border-right: 2px solid var(--color-gray); transform: rotate(45deg);}
 
-.mypage .list_area .list_title {margin-bottom: 15px; font-size: 24px; font-weight: 700; line-height: 35px; color: #98a4b7;}
-.mypage .list_area .list_title::before {content: ' \2713'; margin-right: 15px; font-size: 24px; font-weight: 700; line-height: 45px; color: #98a4b7;}
+.mypage .list_area .list_title {margin-bottom: 15px; font-size: 24px; font-weight: 700; line-height: 35px; color: var(--color-gray);}
+.mypage .list_area .list_title::before {content: ' \2713'; margin-right: 15px; font-size: 24px; font-weight: 700; line-height: 45px; color: var(--color-gray);}
 .mypage .list_area .list_box {margin-bottom: 30px;}
-.mypage .list_area .list_box .list_item {display: flex; justify-content: space-between; gap: 25px; padding: 10px 8px; border-bottom: 1px solid #aec3e480;}
-.mypage .list_area .list_box .list_item .list_subject {flex:1; font-size: 18px; color:#fff; line-height: 24px;}
+.mypage .list_area .list_box .list_item {border-bottom: 1px solid #aec3e4;}
+.mypage .list_area .list_box .list_item a {display: flex; justify-content: space-between; gap: 25px; padding: 10px 8px;}
+.mypage .list_area .list_box .list_item .list_subject {flex:1; font-size: 18px; color:var(--color-white); line-height: 24px;}
 .mypage .list_area .list_box .list_item .list_date {align-self: flex-end; font-size: 14px; color:#ffffff80; line-height: 24px;}
 
 .mypage .list_area .interest_box {width: 100%;}
-.mypage .list_area .interest_item {width: 150px; height: 200px; border: 1px solid #98a4b7;}
+.mypage .list_area .interest_item {width: 150px; height: 200px; border: 1px solid #222934;}
 .mypage .list_area .interest_item:not(:last-child) {margin-right: 10px;}
-.mypage .list_area .interest_item--name {margin-top: 8px; font-size: 16px; line-height: 24px; color: #98a4b7;}
+.mypage .list_area .interest_item--name {margin-top: 8px; font-size: 16px; line-height: 24px; color: var(--color-gray);}
 
 /* 마이페이지 - 수정 */
-.mypage .profile_update_area .user_img {width: 130px; height: 130px; margin: 0 auto 30px; border-radius: 50%; overflow: hidden; background-color: #98a4b7;}
+.mypage .profile_update_area .user_img {width: 130px; height: 130px; margin: 0 auto 30px; border-radius: 50%; overflow: hidden; background-color: var(--color-gray);}
 .mypage .profile_update_area .user_img img {width: 100%; height: 100%;}
 .mypage .profile_update_area .file_box {text-align: center;}
-.mypage .profile_update_area .file_box label[for=input_file] {display: inline-flex; justify-content: center; align-items: center; padding: 0 10px; font-size: 16px; line-height: 30px; color: #172036; border: 1px solid #aec3e4; background-color: #98a4b7; border-radius: 5px;}
+.mypage .profile_update_area .file_box label[for=input_file] {display: inline-flex; justify-content: center; align-items: center; padding: 0 10px; font-size: 16px; line-height: 30px; color: var(--color-darkgray); border: 1px solid #aec3e4; background-color: var(--color-gray); border-radius: 5px;}
 .mypage .profile_update_area .file_box input[type=file] {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0);}
-.mypage .profile_update_area .user_info {display: flex; flex-wrap: wrap; justify-content: space-between; gap: 15px 0; margin-bottom: 25px;}
-.mypage .profile_update_area .user_info_text {font-size: 18px; font-weight: 700; color: #98a4b7;}
-.mypage .profile_update_area .user_info_text-check {font-size: 18px; color: #98a4b7;}
-.mypage .profile_update_area .user_info input[type=text] {width: 100%; padding: 0 10px; font-size: 16px; line-height: 35px; color: #172036; border: 1px solid #aec3e4; background-color: #fff; border-radius: 5px;}
-.mypage .profile_update_area .btn_submit {display: inline-flex; justify-content: center; align-items: center; width: 100%; padding: 0 10px; font-size: 18px; line-height: 50px; color: #172036; border: 1px solid #aec3e4; background-color: #98a4b7; border-radius: 5px;}
+.mypage .profile_update_area .user_info {display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 0; margin-bottom: 25px;}
+.mypage .profile_update_area .user_info_text {font-size: 20px; font-weight: 700; color: var(--color-gray);}
+.mypage .profile_update_area .user_info_text-check {font-size: 18px; color: var(--color-gray);}
+.mypage .profile_update_area .user_info input[type=text] {width: 100%; padding: 0 10px; font-size: 16px; line-height: 35px; color: var(--color-darkgray); border: 1px solid #aec3e4; background-color: var(--color-white); border-radius: 5px;}
+.mypage .profile_update_area .btn_submit {display: inline-flex; justify-content: center; align-items: center; width: 100%; padding: 0 10px; font-size: 18px; line-height: 50px; color: var(--color-darkgray); border: 1px solid #aec3e4; background-color: var(--color-gray); border-radius: 5px;}
 .mypage .btn_area {display:flex; flex-direction:column; align-items:flex-end; gap:10px; text-align:right;}
-.mypage .btn_area .btn_line {display: inline-flex; justify-content: center; align-items: center; padding: 5px; font-size: 14px; color:#98a4b7; text-decoration:underline; text-underline-offset: 3px;}
+.mypage .btn_area .btn_line {display: inline-flex; justify-content: center; align-items: center; padding: 5px; font-size: 14px; color:var(--color-gray); text-decoration:underline; text-underline-offset: 3px;}
 
 /* 마이페이지 - 탈퇴 */
-.mypage .info_text {padding:30px 0; font-size:40px; font-weight:700; color: #98a4b7; text-align:center;}
+.mypage .info_text {padding:30px 0; font-size:40px; font-weight:700; color: var(--color-gray); text-align:center;}

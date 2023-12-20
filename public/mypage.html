@@ -42,9 +42,7 @@
   <main id="contents" class="mypage">
     <div class="mypage_info">
       <section class="profile_area">
-        <div class="user_img">
-              
-        </div>
+        <div class="user_img"></div>
         <div class="user_name"><a href="/mypage_update.html" title="나의 프로필로 이동" class="user_name__link"><span id="username"></span></a></div>
       </section>
   
@@ -73,6 +71,7 @@
     const storage = firebase.storage();
     const postRef = db.collection('post');
 
+    //회원정보(이름, 닉네임, 이미지) 가져오기
     firebase.auth().onAuthStateChanged((user)=>{
       if (!user) {
         location.href='/login.html';
@@ -86,15 +85,18 @@
         $('#username').text(uname)
         $('.user_img').html(uImg)
 
-        //내가쓴게시글
-        let query = postRef.where("uid", "==", uid).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc, i) => {
-              $('.list_box').append('<li><a href="/view.html?id='+doc.id+'" title="'+doc.data().제목+' 보기" class="list_item"><p class="list_subject">'+doc.data(i).제목+'</p><span class="list_date">'+doc.data().날짜.toDate().toLocaleDateString()+'</span></a></li>');
+        //커뮤니티 게시글 중 내가 쓴 게시글 불러오기
+        postRef.where('uid','==',uid).get().then((result) => {
+            result.forEach((doc) => {
+              $('.list_box').append('<li class="list_item"><a href="/view.html?id='+doc.id+'" title="'+doc.data().제목+' 보기"><p class="list_subject">'+doc.data().제목+'</p><span class="list_date">'+doc.data().날짜.toDate().toLocaleDateString()+'</span></a></li>');
             });
-        })
+        }).catch((error)=>{
+          console.log(error);
+  });
       }
     })
 
+    //로그아웃
     function logout() {
       firebase.auth().signOut().then(function(){
         localStorage.removeItem('user');

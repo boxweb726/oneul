@@ -42,12 +42,11 @@
   <main id="contents" class="mypage">
     <div class="mypage_info">
         <p class="info_text">정말 탈퇴하실건가요?</p>
-
     </div>
     
     <div class="btn_area">
         <a href="/mypage.html" class="oneul-btn">취소</a>
-        <a href="javascript:;" title="탈퇴하기" onClick="userDel()" class="oneul-btn">로그아웃</a>
+        <a href="javascript:;" title="탈퇴하기" onClick="userDel()" class="oneul-btn">탈퇴하기</a>
     </div>
   
   </main>
@@ -63,12 +62,12 @@
 
 
   <script>
-    //탈퇴하기
-    
-    const user = firebase.auth().currentUser;
+      const user = firebase.auth().currentUser;
+      //탈퇴하기
     function userDel() {
         firebase.auth().onAuthStateChanged((user)=>{
             user.delete().then(()=>{
+            alert('기다리고 있을게요😭')
                 location.href='/index.html';
             }).catch((error)=>{
     

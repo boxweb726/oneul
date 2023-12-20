@@ -54,16 +54,16 @@
                 <label for="input_file">파일선택</label>
                 <input type="file" name="input_file" id="input_file">
               </div> -->
-              <input type="email" placeholder="이메일" id="email-new" class="oneul-form" readonly>
-              <input type="password" placeholder="패스워드(6자 이상 입력)" id="pw-new" class="oneul-form" required>  
-              <input type="text" placeholder="이름" id="name-new" class="oneul-form" required>
+              <input type="email" placeholder="이메일" id="user_email" class="oneul-form" readonly>
+              <input type="password" placeholder="패스워드(6자 이상 입력)" id="user_pw" class="oneul-form" required>  
+              <input type="text" placeholder="이름" id="user_name" class="oneul-form" required>
             </form> 
           </div>
           
         </div>
         
         <div class="btn_area">
-          <!-- <a href="/mypage_delete.html" class="btn_line">탈퇴하기 ></a> -->
+          <a href="/mypage_delete.html" class="btn_line">탈퇴하기 ></a>
           <button type="submit" class="oneul-btn" id="updateProfile">수정하기</button> 
     </div>
   
@@ -82,26 +82,29 @@
   <script>
     const user = firebase.auth().currentUser;
 
+    //이메일, 기존 저정된 이름가져오기
     firebase.auth().onAuthStateChanged((user)=>{
         if(user) {
             uname = user.displayName;
             uemail = user.email;
-            $('.user_name').text(uname);
-            $('#email-new').val(uemail);
+            $('.user_info_text .user_name').text(uname);
+            $('#user_email').val(uemail);
         }
     });
     
+    //폼에 입력된 비밀번호, 이름 업데이트하기
     $('#updateProfile').click(function(e){
       const form = document.querySelector("#form");
       let state = form.checkValidity();
       if(!!state) {
         e.preventDefault();
-        var userPassword = $('#pw-new').val();
-        var userName = $('#name-new').val();
+        var userPassword = $('#user_pw').val();
+        var userName = $('#user_name').val();
         firebase.auth().currentUser.updateProfile({
           displayName: userName,
           userPassword: userPassword
         }).then(() => {
+          alert('수정완료 :)')
           location.href = "/mypage.html"
         }).catch((error) => {
         }); 
