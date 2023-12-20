@@ -1,15 +1,11 @@
+import USER from './config.js'
+
 document.addEventListener("DOMContentLoaded", function(){
-
-  // 기본 API URL 및 필수 정보 정의
-  const baseApiUrl = "https://api.themoviedb.org/3";
-  const apiKey = "4440ab34848ee6aa6bd8890d39ed2b25";
-  const language = "ko-KR";
-
   // 각 섹션에 맞는 API URL 정의
-  const allApiUrl = `${baseApiUrl}/trending/all/day?api_key=${apiKey}&language=${language}`;
-  const movieApiUrl = `${baseApiUrl}/trending/movie/day?api_key=${apiKey}&language=${language}&page=1`;
-  const tvApiUrl = `${baseApiUrl}/trending/tv/day?api_key=${apiKey}&language=${language}&page=1`;
-  const comingApiUrl = `${baseApiUrl}/movie/upcoming?api_key=${apiKey}&language=${language}&page=1`;
+  const allApiUrl = `${USER.BASEURL}/trending/all/day?${USER.APIKEY}&${USER.LANGUAGE}`;
+  const movieApiUrl = `${USER.BASEURL}/trending/movie/day?${USER.APIKEY}&${USER.LANGUAGE}&page=1`;
+  const tvApiUrl = `${USER.BASEURL}/trending/tv/day?${USER.APIKEY}&${USER.LANGUAGE}&page=1`;
+  const comingApiUrl = `${USER.BASEURL}/movie/upcoming?${USER.APIKEY}&${USER.LANGUAGE}&page=1`;
   const options = { method: "GET", headers: { accept: "application/json" } };
 
   // 데이터를 가져와 화면에 표시하는 함수
