@@ -10,6 +10,8 @@ const TMDB = {
         const tvSwiper = document.querySelector(`[data-category=tv]`);
         const movieSwiperWrap = movieSwiper.querySelector(`.swiper-wrapper`)
         const tvSwiperWrap = tvSwiper.querySelector(`.swiper-wrapper`);
+        const rankWrap = document.querySelector(".search_rank_wrap");
+
 
         // 이미지가 없을시 예외처리
         let filterData = data.results.filter((item) => item.poster_path != null)
@@ -62,13 +64,33 @@ const TMDB = {
             });
 
             searchJS.setWordEvt();
+            rankWrap.style.display = "none";
         }else{
             // 결과 없을 시
             searchListWrap.style.display = "none";
             searchIntroTitle.style.display = "block";
             searchIntroTitle.innerHTML = "검색결과가 없습니다."
+            rankWrap.style.display = "none";
         }
-        
+    },
+    // 오늘의 트렌드 랜더링
+    trendRender : function(data){
+        const rankWrap = document.querySelector(".search_rank_wrap");
+
+        data.results.forEach((item, idx) => {
+            // 10위까지만 랜더링
+            if(idx < 10){
+                let html = `
+                    <li class="item">
+                        <a href="/detail.html?id=${item.id}&type=${item.media_type}" name="${item.media_type == "movie" ? item.title : item.name}" class="btn_link" title="${item.media_type == "movie" ? item.title : item.name} 상세 페이지로 이동">
+                            <span class="num">${idx + 1}</span>
+                            <span class="name">${item.media_type == "movie" ? item.title : item.name}</span>
+                        </a>
+                    </li>
+                `
+                rankWrap.insertAdjacentHTML("beforeend", html);
+            }
+        })
     }
 }
 
@@ -82,7 +104,7 @@ const callAPI = {
             Authorization: USER.Authorization
         }
     },
-   //  검색 조회
+    //  검색 조회
     searchApi : function(value){
         fetch(`${USER.BASEURL}/search/multi?query=${value}&adult=false&${USER.LANGUAGE}&page=1`,callAPI.options)
         .then(data => data.json())
@@ -91,7 +113,17 @@ const callAPI = {
         })
         .catch(err => console.error(err));
     },
+    //  검색 조회
+    trendApi : function(){
+        fetch(`${USER.BASEURL}/trending/all/day?${USER.LANGUAGE}`,callAPI.options)
+        .then(data => data.json())
+        .then(data => {
+            TMDB.trendRender(data);
+        })
+        .catch(err => console.error(err));
+    },
 }
+callAPI.trendApi();
 
  /*   JS   */ 
 const searchJS = {

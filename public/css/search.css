@@ -14,12 +14,20 @@ img{display: block; width: 100%;}
 .sec_search .btn_reset svg{vertical-align: middle;}
 
 .sec_search .word_list{display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding:0; margin:0;}
-.sec_search .word{display: inline-flex; justify-content: center; align-items: center; padding: 0px 8px 0 16px; border-radius: 50px; font-size: 12px; color: #fff; background-color: #25304a; text-transform: uppercase;  height: 36px; display: flex; align-items: center;}
+.sec_search .word{display: inline-flex; display: flex; justify-content: center; align-items: center; height: 32px; padding: 0px 8px 0 16px; border-radius: 50px; font-size: 12px; color: #fff; background-color: #25304a; text-transform: uppercase;   }
 .sec_search .word span{line-height: 1.4em;}
 .sec_search .btn_delete{
     display: inline-block; width: 22px; height: 22px; cursor: pointer;padding:0;margin:0;outline:0;border:0;
     background: url(https://static.kinolights.com/icon/ic-close-navy05.svg) no-repeat center/16px ;
 }
+
+/* 랭킹영역 */
+.search_rank_wrap .item + .item{margin-top:10px;}
+.search_rank_wrap .item .btn_link{display: inline-flex; justify-content: center; align-items: center; gap: 6px; height: 32px; padding: 0 16px 0 12px; background-color: #25304a; color: #fff; border-radius: 50px;}
+.search_rank_wrap .item .num{font-size: 16px; font-weight: 700; font-style: oblique;}
+.search_rank_wrap .item .name{font-size: 12px; font-weight: 500;}
+
+
 
 /* 검색결과 */
 .swiper-wrapper { padding:0; margin:0;}
