@@ -62,9 +62,8 @@
 
 
   <script>
-    //탈퇴하기
-    
-    const user = firebase.auth().currentUser;
+      const user = firebase.auth().currentUser;
+      //탈퇴하기
     function userDel() {
         firebase.auth().onAuthStateChanged((user)=>{
             user.delete().then(()=>{

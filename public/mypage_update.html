@@ -82,6 +82,7 @@
   <script>
     const user = firebase.auth().currentUser;
 
+    //이메일, 기존 저정된 이름가져오기
     firebase.auth().onAuthStateChanged((user)=>{
         if(user) {
             uname = user.displayName;
@@ -91,6 +92,7 @@
         }
     });
     
+    //폼에 입력된 비밀번호, 이름 업데이트하기
     $('#updateProfile').click(function(e){
       const form = document.querySelector("#form");
       let state = form.checkValidity();
