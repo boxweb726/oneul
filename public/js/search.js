@@ -91,6 +91,8 @@ const TMDB = {
                 rankWrap.insertAdjacentHTML("beforeend", html);
             }
         })
+        searchJS.setWordEvt();
+
     }
 }
 
