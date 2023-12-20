@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function(){
   const allApiUrl = `${USER.BASEURL}/trending/all/day?${USER.APIKEY}&${USER.LANGUAGE}`;
   const movieApiUrl = `${USER.BASEURL}/trending/movie/day?${USER.APIKEY}&${USER.LANGUAGE}&page=1`;
   const tvApiUrl = `${USER.BASEURL}/trending/tv/day?${USER.APIKEY}&${USER.LANGUAGE}&page=1`;
-  const comingApiUrl = `${USER.BASEURL}/movie/upcoming?${USER.APIKEY}&${USER.LANGUAGE}&page=1`;
   const options = { method: "GET", headers: { accept: "application/json" } };
 
   // 데이터를 가져와 화면에 표시하는 함수
