@@ -1,0 +1,49 @@
+ /* common css*/
+ main{padding: 56px 0;}
+ img{display: block; width: 100%;}
+ .inner{width: 94%;; max-width: 700px; margin: 0 auto;}
+
+ /* 영화정보 상단 */
+ .sec_info .inner{position: relative;}
+ .sec_info .nav{display: none;position: absolute; right: 10px; top: 10px; z-index: 3;}
+ .sec_info .bg_box .bg{width: 100%; height: 310px; }
+ .sec_info .bg_box .gradient{ position: absolute; inset: 0; background: linear-gradient(180deg,rgba(16,19,34,0),rgba(16,19,34,.76) 77.19%,var(--color-darkblue) 93.19%),linear-gradient(90deg,rgba(16,19,34,0) 72.46%,rgba(16,19,34,.76) 90.53%,var(--color-darkblue) 98.12%),linear-gradient(270deg,rgba(16,19,34,0) 72.46%,rgba(16,19,34,.76) 90.53%,var(--color-darkblue) 98.12%)}
+ .sec_info .info_box{position: absolute; inset: auto 0 0 0; display: flex; justify-content: space-between; align-items: flex-end;}
+ .sec_info .text_box .type{display: inline-flex; justify-content: center; align-items: center; height: 23px; padding: 0 12px; margin-bottom: 6px; font-size: 13px; font-weight: 600; text-transform: uppercase; border: 1px solid var(--color-white); color: var(--color-white);}
+ .sec_info .text_box .title{margin-bottom: 3px; font-size: 20px; font-weight: 700; line-height: 28px; color: var(--color-white);}
+ .sec_info .text_box .date{margin-bottom: 15px; font-size: 14px; color: var(--color-gray); line-height: 20px; font-weight: 400; letter-spacing: -0.05em;}
+ .sec_info .text_box .tag_list{display: flex; gap: 8px; flex-wrap: wrap;padding:0;}
+ .sec_info .text_box .tag{display: inline-flex; justify-content: center; align-items: center; height: 24px; padding: 0 10px; border-radius: 50px; font-size: 12px; color: #fff; background-color: #25304a; text-transform: uppercase;}
+ .sec_info .poster_box{flex-shrink: 0; width: 100px; border-radius: 8px; overflow: hidden;}
+
+ /* 영화정보 하단 */
+ .swiper-wrapper { padding:0;margin:0;}
+ .sec_contents .inner{padding: 0;}
+
+ /* 탭영역 */
+ .sec_contents .tab_btn_wrap{display: flex; border-bottom: 1px solid var(--color-darkgray);}
+ .sec_contents .tab_btn_wrap .btn_tab{display: inline-flex; justify-content: center; align-items: center; height: 37px; width: 120px;color: var(--color-darkgray); cursor: pointer; font-weight: 700;}
+ .sec_contents .tab_btn_wrap .btn_tab.active{position: relative; color: var(--color-white);}
+ .sec_contents .tab_btn_wrap .btn_tab.active::after{content: ''; position: absolute; bottom: -1px; width: 100%; height: 2px; background-color: var(--color-white);}
+ 
+ .sec_contents .contents{display: none;}
+ .sec_contents .contents.active{display: block;}
+
+ /* 줄거리 */
+ #summary .sec{padding:40px 0 30px; border-bottom: 1px solid var(--color-darkgray);}
+ #summary .sec .title{ margin: 0 0 10px 0; font-size: 17px; font-weight: 700; line-height: 28px; color: var(--color-white);}
+ #summary .summary_box .summary{font-size: 13px; font-weight: 500; line-height: 1.5em; color: var(--color-white); letter-spacing: -0.05em;}
+
+ /* 예고편 */
+ #summary .video_wrap{position: relative; padding-bottom: 56.25%;}
+ #summary .video_box iframe{position: absolute; width: 100%; height: 100%;}
+
+ /* 출연진 관련영화 */
+ #summary .swiper-container .item{width: 140px; margin-right: 20px;}
+ #summary .swiper-container .item:last-child{margin-right: 0;}
+ #summary .swiper-container .item .img_box{margin-bottom: 10px; border-radius: 8px; overflow: hidden;}
+ #summary .swiper-container .item .text_box{padding-bottom: 4px;}
+ #summary .swiper-container .item .name{margin-bottom: 3px; font-size: 16px; font-weight: 700;}
+ #summary .swiper-container .item .character{font-size: 14px; font-weight: 700; color: #9ba2b7}
+ #summary .swiper-container .item .title{display: -webkit-box; display: -ms-flexbox; margin-bottom: 5px; overflow:hidden; vertical-align:top; text-overflow: ellipsis; word-break:break-all; -webkit-box-orient:vertical; -webkit-line-clamp:2; font-size: 14px; line-height: 1.3em; color: #fff; font-weight: 700; }
+ #summary .swiper-container .item .date{ font-size:12px; font-weight: 500; color: #fff;}

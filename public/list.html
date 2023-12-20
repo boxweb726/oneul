@@ -4,16 +4,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="css/style.css" rel="stylesheet">
+  <title>오늘뭐볼까? - 커뮤니티</title>
+  <link href="./css/style.css" rel="stylesheet">
+  <link href="./css/common.css" rel="stylesheet">
+  <link rel="icon" href="./images/logo_favicon.png" type="image/x-icon">
 </head>
 <body>
   <main id="contents">
     <header class="header-wrap">
-      <a href="/index.html"><img src="/images/logo.svg"></a>
+      <a href="/"><img src="/images/logo.svg"></a>
       <a href="javascript:;" onClick="postUpload()" class="upload-btn btn">글쓰기</a>
     </header>
     <section class="content">
+      <a href="javascript:;" class="ad-ban" onClick="alert('광고문의 : 인피니티(단가비쌈)')">
+        <img src="./images/ban.svg" style="width:100%;">
+      </a>
       <ul class="post-list"></ul>
     </section>
     <footer class="footer-wrap">
@@ -51,25 +56,27 @@
   <script>
     const db = firebase.firestore();
  
-    db.collection('post').get().then((result)=>{
+    // 파이어베이스 DB에 접근, POST라는 컬렉션에서 날짜내림차순 정렬하여 출력
+    db.collection('post').orderBy('날짜','desc').get().then((result)=>{
         result.forEach((doc)=>{
-            var 템플릿 = `<li class="post-list-item">
-              <article class="post-wrap">
-                  <a href="/view.html?id=${doc.id}" class="post-link"> 
-                    <div class="post-item-top">
-                      <p class="post-user">${doc.data().이름}</p>                
-                      <p class="post-date">${doc.data().날짜.toDate().toLocaleString()}</p>
-                    </div>                    
-                    <h2 class="post-title">${doc.data().제목}</h2>
-                    <p class="post-content">${doc.data().내용}</p>
-                   
-                  </a>
-              </article>
-          </li>`;
-            $('.post-list').append(템플릿)
+            const postList = `<li class="post-list-item">
+                            <article class="post-wrap">
+                                <a href="/view.html?id=${doc.id}" class="post-link"> 
+                                  <div class="post-item-top">
+                                    <p class="post-user">${doc.data().이름}</p>                
+                                    <p class="post-date">${doc.data().날짜.toDate().toLocaleString()}</p>
+                                  </div>                    
+                                  <h2 class="post-title">${doc.data().제목}</h2>
+                                  <p class="post-content">${doc.data().내용}</p>
+                                  <img src="${doc.data().이미지}" onerror="this.style.display='none'">
+                                </a>
+                            </article>
+                        </li>`;
+            $('.post-list').append(postList);
         })
     })
 
+    // 비회원 글쓰기 제한 함수
     function postUpload() {
       firebase.auth().onAuthStateChanged((user)=>{
         if (user) {

@@ -35,27 +35,14 @@ img {position: relative; width: 100%;}
 
 
 
-.header-wrap {
-  position:fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  top:0;
-  max-width: 700px;
-  background: #101322;
-  height: 56px;
-  padding: 0 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
+
 
 .content {
   padding: 56px 0;
   color: #fff;
 }
 
+<<<<<<< HEAD
 .footer-wrap {
   position: fixed;
   width: 100%;
@@ -64,6 +51,9 @@ img {position: relative; width: 100%;}
   left: 0;
   z-index: 10;
 }
+=======
+
+>>>>>>> a4b6c0fa4adade122ad8737b5a98ebcacc9d3cf7
 
 .navigator {
   display: flex;
@@ -112,10 +102,18 @@ img {position: relative; width: 100%;}
 
 /* 커뮤니티 */
 
-.post-list, .post-write, .post-view, .oneul-container {
+.ad-ban {
   padding:0 16px;
-  margin:0;
+  display:block;
 }
+
+.post-list, .post-write, .post-view, .oneul-container {
+  padding: 16px;
+  margin: 0;
+}
+
+.d-flex { display:flex }
+.flex-column { flex-flow: column }
 
 .post-list-item {
    margin: 0 0 16px 0
@@ -134,7 +132,15 @@ img {position: relative; width: 100%;}
   color: #9ba2b7;
 }
 
-
+.post-view .post-title {
+  font-weight: bold;
+  margin: 20px 0;
+}
+.post-view .post-content {
+  font-weight: 100;
+  line-height: 1.7;
+  font-size: 14px;
+}
 
 .post-wrap {
     padding: 20px;
@@ -201,6 +207,14 @@ img {position: relative; width: 100%;}
 
 .post-link img {
   max-width: 100%;
+  margin: 10px 0 0 0;
+  border-radius: 10px;
+}
+
+.post-img {
+  max-width: 100%;
+  margin: 10px 0 0 0;
+  border-radius: 10px;
 }
 
 .img-wrap img { max-width: 100% }
@@ -235,6 +249,10 @@ img {position: relative; width: 100%;}
 
 .h-100 {
   height: 100%;
+}
+
+.flex-1 {
+  flex: 1;
 }
 
 .login-txt {
