@@ -75,14 +75,15 @@
     const db = firebase.firestore();
     const storage = firebase.storage();
 
+    // 유저의 메일, 패스워드, 이름 정보를 받아 firebase api를 통해 create 해주고 성공 시 리스트 페이지 이동
     $('#register').click(function(e){
       const form = document.querySelector("#form");
       let state = form.checkValidity();
       if(!!state) {
         e.preventDefault();
-        var userMail = $('#email-new').val();
-        var userPassword = $('#pw-new').val();
-        var userName = $('#name-new').val();
+        const userMail = $('#email-new').val();
+        const userPassword = $('#pw-new').val();
+        const userName = $('#name-new').val();
         firebase.auth().createUserWithEmailAndPassword(userMail, userPassword).then((result)=>{
             console.log(result);
             console.log(result.user);

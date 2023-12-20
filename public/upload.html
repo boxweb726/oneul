@@ -40,7 +40,7 @@
     <div class="post-write h-100">
       <form id="form" class="h-100 d-flex flex-column">
         <input type="text" placeholder="제목" id="title" class="oneul-form" required>
-        <textarea id="content" class="oneul-form flex-1" placeholder="내용을 입력하세요" required></textarea>
+        <textarea id="content" class="oneul-form flex-1" placeholder="내용을 입력하세요" required style="resize:none"></textarea>
         <input type="file" id="image" class="oneul-form">
         <button type="submit" id="send" class="oneul-btn">글등록</button>
       </form>
@@ -66,6 +66,7 @@
       if(!!state) {
         e.preventDefault();
 
+        // 이미지 파일 관련 변수 설정
         var file = document.querySelector('#image').files[0]; 
         var storageRef = storage.ref();
         var savePath = storageRef.child('image/' + file?.name);
@@ -83,6 +84,7 @@
               upload.snapshot.ref.getDownloadURL().then((url) => {
                 console.log('업로드된 경로는', url);
 
+                // 글 작성 시 저장할 데이터의 값
                 var postData = {
                   제목 : $('#title').val(),
                   내용 : $('#content').val(),
@@ -91,6 +93,7 @@
                   이름 : JSON.parse(localStorage.getItem('user')).displayName,
                   이미지 : url,
                 }
+                // firebase 문법 이용하여 post collection 에 등록 후 리스트 페이지 이동
                 db.collection('post').add(postData).then((result)=>{
                   console.log(result);
                   window.location.href = "/list.html"
