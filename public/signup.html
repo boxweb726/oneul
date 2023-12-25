@@ -51,6 +51,7 @@
       <form id="form">
         <input type="email" placeholder="이메일" id="email-new" class="oneul-form" required>
         <input type="password" placeholder="패스워드(6자 이상 입력)" id="pw-new" class="oneul-form" required>  
+        <input type="password" placeholder="패스워드 확인" id="pw-new-confirm" class="oneul-form" required>  
         <input type="text" placeholder="이름" id="name-new" class="oneul-form" required>
         <button type="submit" class="oneul-btn" id="register">가입하기</button> 
       </form>   
@@ -74,7 +75,7 @@
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-    // 유저의 메일, 패스워드, 이름 정보를 받아 firebase api를 통해 create 해주고 성공 시 리스트 페이지 이동
+    // 가입 버튼 클릭 시 입력된 유저의 메일, 패스워드, 이름 정보를 받아 firebase api를 통해 DB에 저장, 로컬스토리지 저장
     $('#register').click(function(e){
       const form = document.querySelector("#form");
       let state = form.checkValidity();
@@ -82,15 +83,21 @@
         e.preventDefault();
         const userMail = $('#email-new').val();
         const userPassword = $('#pw-new').val();
+        const userPasswordConfirm = $('#pw-new-confirm').val();
         const userName = $('#name-new').val();
-        firebase.auth().createUserWithEmailAndPassword(userMail, userPassword).then((result)=>{
+
+        if(userPassword == userPasswordConfirm) {          
+          firebase.auth().createUserWithEmailAndPassword(userMail, userPassword).then((result)=>{
             console.log(result);
             console.log(result.user);
             result.user.updateProfile( {displayName : userName} ).then(()=>{
               localStorage.setItem('user', JSON.stringify(result.user))
               window.location.href = "/list.html"
             })
-        }).catch()
+          }).catch()
+        } else {
+          alert('비밀번호가 서로 일치하지 않습니다.')
+        }
       }
     })
 
