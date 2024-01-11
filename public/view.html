@@ -64,18 +64,29 @@
   <script>
     const db = firebase.firestore();
     const storage = firebase.storage();
-
+    const undefindImg = "https://firebasestorage.googleapis.com/v0/b/oneul-9b3e4.appspot.com/o/image%2Fundefined?alt=media&token=fe21f6f3-9782-493c-9caf-8c88a676ad70"
     var queryString = new URLSearchParams(window.location.search);
     
     // URL의 id 파라미터값을 queiryString 으로 추출 후 db조회하여 일치 시 해당 글의 정보를 출력
     db.collection('post').doc(queryString.get('id')).get().then((result)=>{
-        console.log(result.data())
-        console.log(queryString.get('id'))
+        // console.log(result.data(), "zzzzz")
+        // console.log(queryString.get('id'))
+
+        // 잘못된 쿼리 예외처리
+        if(result.data() == undefined){
+          alert("잘못된 접근입니다.")
+          window.location = "/list.html";
+        } 
+
         $('.post-title').html(result.data().제목)
         $('.post-content').html(result.data().내용)
         $('.post-user').html(result.data().이름)
         $('.post-date').html(result.data().날짜.toDate().toLocaleString())
         $('.post-img').attr('src', result.data().이미지);
+
+        if(이미지 = undefindImg){
+          $('.post-img').remove();
+        }
     })  
   </script>
   
