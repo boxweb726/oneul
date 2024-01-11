@@ -1,5 +1,7 @@
 import USER from './config.js'
 
+
+
 /*   TMDB Render   */ 
 const TMDB = {
     // 검색결과 랜더링
@@ -205,6 +207,7 @@ const searchJS = {
         storage = JSON.parse(storage);
         let nameArr = [...new Set(storage)];
 
+        wordList.innerHTML = "";
         // 최근 본 컨텐츠 랜더링
         nameArr.forEach((el, idx) => {
             let html = `
@@ -243,3 +246,8 @@ const searchJS = {
     }
 }
 searchJS.init();
+
+// bfcache이슈, 최근본 검색어 예외처리
+window.addEventListener('pagehide', (event) => {
+    if (event.persisted === true) searchJS.getWordEvt();
+  });

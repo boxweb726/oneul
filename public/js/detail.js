@@ -125,7 +125,12 @@ const callAPI = {
         .then(data => {
             TMDB.infoRender(data, type);
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err)
+            alert("잘못된 접근입니다.")
+            window.location.href = "/search.html"
+
+        });
     },
     // 예고편 조회
     videoApi : function(id, type){
